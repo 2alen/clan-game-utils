@@ -376,6 +376,7 @@
       <h2>Резервная копия</h2>
       <p class="hint">Данные живут в этом браузере (localStorage). Периодически копируйте выгрузку в надёжное место — например, в заметки или файл.</p>
       <div class="frow" style="margin-bottom:10px">
+        <button class="btn ghost" id="dlBtn">Скачать файлом</button>
         <button class="btn ghost" id="exportBtn">Выгрузить в поле ниже</button>
         <button class="btn ghost" id="copyBtn">Скопировать</button>
         <button class="btn ghost" id="importBtn">Импортировать из поля</button>
@@ -1043,6 +1044,31 @@ function renderGoals() {
   });
 }
 
+document.getElementById('dlBtn').addEventListener('click', async () => {
+  const json = JSON.stringify(state, null, 1);
+  const name = 'kazna-klana-' + todayStr() + '.json';
+  const note = document.getElementById('ioNote');
+  if (window.claude && typeof window.claude.use === 'function') {
+    const downloads = await window.claude.use('downloads');
+    if (downloads) {
+      try {
+        await downloads.save({ filename: name, data: json });
+        note.textContent = 'Файл сохранён: ' + name;
+      } catch (err) {
+        if (err && err.code === 'declined') note.textContent = 'Скачивание отменено.';
+        else if (err && err.code === 'rate_limited') note.textContent = 'Подождите пару секунд и нажмите ещё раз.';
+        else note.textContent = 'Скачать не получилось — воспользуйтесь «Выгрузить в поле ниже» и скопируйте текст.';
+      }
+      return;
+    }
+  }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  note.textContent = 'Файл сохранён: ' + name;
+});
 document.getElementById('exportBtn').addEventListener('click', () => {
   document.getElementById('ioArea').value = JSON.stringify(state, null, 1);
   document.getElementById('ioNote').textContent = 'Выгружено: участников ' + state.members.length +
