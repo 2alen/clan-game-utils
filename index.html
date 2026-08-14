@@ -432,7 +432,7 @@ Eyloten | 12 | 87,941
 Eydanen | 12 | 87,211
 Ceretius | 11 | 86,999
 Envening | 12 | 81,495
-Orofed | 11 | 78,745
+Orodfed | 11 | 78,745
 Tuzshura | 11 | 78,157
 Digol | 11 | 72,319
 Tomuro | 12 | 70,327
@@ -480,7 +480,12 @@ let state = blank();
     if (raw) {
       const s = JSON.parse(raw);
       state = Object.assign(blank(), s);
-      if (state.members.length || state.deliveries.length || state.power.length) return;
+      if (state.members.length || state.deliveries.length || state.power.length) {
+        /* разовое исправление опечатки в стартовом ростере */
+        const typo = state.members.find(m => m.name === 'Orofed');
+        if (typo && !state.members.some(m => m.name === 'Orodfed')) { typo.name = 'Orodfed'; save(); }
+        return;
+      }
     }
   } catch (e) { state = blank(); }
   importRoster(SEED_ROSTER, todayStr());
