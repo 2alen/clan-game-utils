@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Казна клана</title>
+<style>
+  :root {
+    color-scheme: light;
+    --page:        #f9f9f7;
+    --surface:     #fcfcfb;
+    --ink:         #0b0b0b;
+    --ink-2:       #52514e;
+    --muted:       #898781;
+    --grid:        #e1e0d9;
+    --baseline:    #c3c2b7;
+    --border:      rgba(11,11,11,0.10);
+    --wood:        #1baf7a;
+    --stone:       #2a78d6;
+    --iron:        #eb6834;
+    --good:        #006300;
+    --good-badge:  #0ca30c;
+    --critical:    #d03b3b;
+    --chip-wash:   rgba(11,11,11,0.045);
+    --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+    --s5: #e87ba4; --s6: #008300; --s7: #4a3aa7; --s8: #e34948;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --page:        #0d0d0d;
+      --surface:     #1a1a19;
+      --ink:         #ffffff;
+      --ink-2:       #c3c2b7;
+      --muted:       #898781;
+      --grid:        #2c2c2a;
+      --baseline:    #383835;
+      --border:      rgba(255,255,255,0.10);
+      --wood:        #199e70;
+      --stone:       #3987e5;
+      --iron:        #d95926;
+      --good:        #0ca30c;
+      --good-badge:  #0ca30c;
+      --critical:    #e66767;
+      --chip-wash:   rgba(255,255,255,0.06);
+      --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+      --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --page:        #0d0d0d;
+    --surface:     #1a1a19;
+    --ink:         #ffffff;
+    --ink-2:       #c3c2b7;
+    --muted:       #898781;
+    --grid:        #2c2c2a;
+    --baseline:    #383835;
+    --border:      rgba(255,255,255,0.10);
+    --wood:        #199e70;
+    --stone:       #3987e5;
+    --iron:        #d95926;
+    --good:        #0ca30c;
+    --good-badge:  #0ca30c;
+    --critical:    #e66767;
+    --chip-wash:   rgba(255,255,255,0.06);
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #008300; --s7: #9085e9; --s8: #e66767;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--page);
+    color: var(--ink);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 20px 16px 64px; }
+
+  header.app { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 6px 0 18px; }
+  h1 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 30px; font-weight: 600; letter-spacing: .2px;
+  }
+  .tagline { color: var(--muted); font-size: 13px; }
+
+  /* ---- resource cards ---- */
+  .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+  .res-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 14px 16px 16px;
+  }
+  .res-head { display: flex; align-items: center; gap: 8px; }
+  .res-dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .res-name { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); }
+  .res-done { margin-left: auto; font-size: 12px; font-weight: 600; color: var(--good); }
+  .res-num { margin-top: 8px; font-size: 26px; font-weight: 650; line-height: 1.15; }
+  .res-num small { font-size: 14px; font-weight: 500; color: var(--muted); }
+  .meter { margin-top: 10px; height: 10px; border-radius: 5px; background: var(--grid); overflow: hidden; }
+  .meter > i { display: block; height: 100%; border-radius: 5px 0 0 5px; }
+  .meter > i.full { border-radius: 5px; }
+  .res-sub { margin-top: 8px; display: flex; justify-content: space-between; font-size: 12.5px; color: var(--ink-2); }
+  .res-sub .d7 { color: var(--good); font-weight: 600; }
+
+  /* ---- tabs ---- */
+  nav.tabs { display: flex; gap: 4px; margin: 22px 0 16px; border-bottom: 1px solid var(--grid); flex-wrap: wrap; }
+  nav.tabs button {
+    appearance: none; border: 0; background: none; color: var(--ink-2);
+    font: 600 14px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+    padding: 10px 14px 12px; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+    border-radius: 6px 6px 0 0;
+  }
+  nav.tabs button:hover { background: var(--chip-wash); }
+  nav.tabs button.on { color: var(--ink); border-bottom-color: var(--ink); }
+  nav.tabs button:focus-visible, button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--stone); outline-offset: 1px;
+  }
+
+  /* ---- panels & cards ---- */
+  .panel { display: none; }
+  .panel.on { display: block; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; margin-bottom: 14px;
+  }
+  .card h2 { margin: 0 0 4px; font-size: 16px; font-weight: 650; }
+  .card .hint { color: var(--muted); font-size: 12.5px; margin: 0 0 12px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  @media (max-width: 760px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ---- forms ---- */
+  .frow { display: flex; gap: 10px; flex-wrap: wrap; align-items: flex-end; }
+  .field { display: flex; flex-direction: column; gap: 4px; }
+  .field > label { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  input, select, textarea {
+    font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink); background: var(--page);
+    border: 1px solid var(--baseline); border-radius: 7px; padding: 8px 10px;
+  }
+  textarea { width: 100%; resize: vertical; }
+  .btn {
+    appearance: none; cursor: pointer;
+    font: 600 14px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--page); background: var(--ink);
+    border: 1px solid var(--ink); border-radius: 7px; padding: 10px 16px;
+  }
+  .btn:hover { opacity: .88; }
+  .btn.ghost { background: none; color: var(--ink); border-color: var(--baseline); }
+  .btn.ghost:hover { background: var(--chip-wash); opacity: 1; }
+  .btn.small { padding: 6px 10px; font-size: 12.5px; }
+  .btn.danger { background: none; border-color: transparent; color: var(--critical); padding: 4px 8px; }
+
+  .seg { display: inline-flex; border: 1px solid var(--baseline); border-radius: 7px; overflow: hidden; }
+  .seg button {
+    appearance: none; border: 0; background: none; cursor: pointer;
+    font: 600 13px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink-2); padding: 9px 12px; display: flex; align-items: center; gap: 6px;
+  }
+  .seg button + button { border-left: 1px solid var(--baseline); }
+  .seg button.on { background: var(--chip-wash); color: var(--ink); }
+
+  /* ---- tables ---- */
+  .tbl-wrap { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th {
+    text-align: left; font-size: 11.5px; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--muted); font-weight: 600; padding: 8px 10px; border-bottom: 1px solid var(--grid);
+    white-space: nowrap;
+  }
+  td { padding: 9px 10px; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+  tr:last-child td { border-bottom: 0; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.dt { white-space: nowrap; color: var(--ink-2); }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); white-space: nowrap; }
+  .chip i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+
+  /* ---- silent list ---- */
+  .silent-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .silent {
+    display: inline-flex; align-items: baseline; gap: 7px;
+    background: var(--chip-wash); border-radius: 999px; padding: 5px 12px; font-size: 13.5px;
+  }
+  .silent b { font-weight: 600; }
+  .silent span { color: var(--muted); font-size: 12px; }
+  .allgood { color: var(--good); font-weight: 600; font-size: 14px; }
+
+  /* ---- leaders bars ---- */
+  .lead-row { display: grid; grid-template-columns: 130px 1fr 84px; gap: 10px; align-items: center; margin: 7px 0; }
+  .lead-name { font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lead-bar { display: flex; gap: 2px; height: 14px; align-items: stretch; }
+  .lead-bar i { display: block; min-width: 2px; }
+  .lead-bar i:last-child { border-radius: 0 4px 4px 0; }
+  .lead-bar i:first-child { border-radius: 0; }
+  .lead-val { font-size: 12.5px; color: var(--ink-2); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; }
+
+  /* ---- power chart ---- */
+  .chart-box { position: relative; }
+  svg text { font: 11px system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--muted); }
+  svg .dl { font-size: 11.5px; font-weight: 600; fill: var(--ink-2); }
+  .member-picks { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+  .pick {
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    border: 1px solid var(--baseline); border-radius: 999px; padding: 4px 11px;
+    font-size: 13px; color: var(--ink-2); background: none;
+  }
+  .pick.on { background: var(--chip-wash); color: var(--ink); border-color: var(--ink-2); }
+  .pick i { width: 8px; height: 8px; border-radius: 50%; background: var(--baseline); }
+
+  #tip {
+    position: fixed; z-index: 10; pointer-events: none; display: none;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.18);
+    padding: 8px 11px; font-size: 12.5px; max-width: 260px;
+  }
+  #tip .t-h { font-weight: 600; margin-bottom: 3px; }
+  #tip .t-r { display: flex; align-items: center; gap: 6px; color: var(--ink-2); }
+  #tip .t-r b { margin-left: auto; padding-left: 12px; color: var(--ink); font-variant-numeric: tabular-nums; }
+  #tip .t-r i { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+
+  .empty { color: var(--muted); font-size: 14px; padding: 18px 4px; text-align: center; }
+  .note { font-size: 12.5px; color: var(--muted); }
+  .growth-up { color: var(--good); font-weight: 600; }
+  .growth-flat { color: var(--muted); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .meter > i { transition: width .4s ease; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="app">
+    <h1>Казна клана</h1>
+    <div class="tagline">обозы на постройку столицы — Total Battle</div>
+  </header>
+
+  <section class="res-grid" id="resCards"></section>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="log" class="on">Обозы</button>
+    <button data-tab="members">Участники</button>
+    <button data-tab="power">Могущество</button>
+    <button data-tab="data">Данные</button>
+  </nav>
+
+  <!-- ================= ОБОЗЫ ================= -->
+  <section class="panel on" id="panel-log">
+    <div class="card">
+      <h2>Записать обоз</h2>
+      <p class="hint">Количество можно писать сокращённо: <b>500к</b> = 500 тыс., <b>1.2м</b> или <b>1.2кк</b> = 1,2 млн.</p>
+      <div class="frow">
+        <div class="field">
+          <label for="dDate">Дата</label>
+          <input type="date" id="dDate">
+        </div>
+        <div class="field">
+          <label for="dMember">Участник</label>
+          <select id="dMember"></select>
+        </div>
+        <div class="field">
+          <label>Ресурс</label>
+          <div class="seg" id="dRes"></div>
+        </div>
+        <div class="field">
+          <label for="dAmount">Сколько</label>
+          <input type="text" id="dAmount" placeholder="напр. 1.5м" size="10" inputmode="decimal">
+        </div>
+        <div class="field" style="flex:1; min-width:140px">
+          <label for="dNote">Заметка</label>
+          <input type="text" id="dNote" placeholder="необязательно">
+        </div>
+        <button class="btn" id="dAdd">Записать</button>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h2>Кто не присылал</h2>
+        <p class="hint">Активные участники без обозов за выбранный срок.</p>
+        <div class="seg" id="silentRange" style="margin-bottom:12px"></div>
+        <div id="silentList"></div>
+      </div>
+      <div class="card">
+        <h2>Лидеры по вкладу</h2>
+        <p class="hint">Топ-10 по сумме всех трёх ресурсов.</p>
+        <div id="leaders"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Журнал обозов</h2>
+      <div class="frow" style="margin-bottom:10px">
+        <div class="field">
+          <label for="fMember">Фильтр: участник</label>
+          <select id="fMember"></select>
+        </div>
+        <div class="field">
+          <label for="fRes">Фильтр: ресурс</label>
+          <select id="fRes">
+            <option value="">— все —</option>
+            <option value="wood">Дерево</option>
+            <option value="stone">Камень</option>
+            <option value="iron">Железо</option>
+          </select>
+        </div>
+      </div>
+      <div class="tbl-wrap" id="logTable"></div>
+    </div>
+  </section>
+
+  <!-- ================= УЧАСТНИКИ ================= -->
+  <section class="panel" id="panel-members">
+    <div class="card">
+      <h2>Добавить участников</h2>
+      <p class="hint">Можно вставить сразу список — по одному нику на строку (номера и точки в начале строк отбрасываются, так что список со скриншота ростера подойдёт как есть).</p>
+      <div class="frow">
+        <div class="field" style="flex:1; min-width:220px">
+          <label for="mBulk">Ники</label>
+          <textarea id="mBulk" rows="3" placeholder="Воевода&#10;2. Медведь&#10;3. Тихий_Дон"></textarea>
+        </div>
+        <button class="btn" id="mAdd">Добавить</button>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Справочник клана</h2>
+      <div class="tbl-wrap" id="memberTable"></div>
+    </div>
+  </section>
+
+  <!-- ================= МОГУЩЕСТВО ================= -->
+  <section class="panel" id="panel-power">
+    <div class="card">
+      <h2>Записать замер могущества</h2>
+      <p class="hint">Сокращения: <b>к</b> — тысячи, <b>м/кк</b> — миллионы, <b>б</b> — миллиарды. Повторный замер участника за ту же дату заменяет старый.</p>
+      <div class="frow">
+        <div class="field">
+          <label for="pDate">Дата</label>
+          <input type="date" id="pDate">
+        </div>
+        <div class="field">
+          <label for="pMember">Участник</label>
+          <select id="pMember"></select>
+        </div>
+        <div class="field">
+          <label for="pValue">Могущество</label>
+          <input type="text" id="pValue" placeholder="напр. 38.5м" size="10" inputmode="decimal">
+        </div>
+        <button class="btn" id="pAdd">Записать</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Рост могущества</h2>
+      <p class="hint">Выберите до 8 участников — линии показывают замеры по датам.</p>
+      <div class="member-picks" id="powerPicks"></div>
+      <div class="chart-box" id="powerChart"></div>
+      <div class="legend" id="powerLegend"></div>
+    </div>
+
+    <div class="card">
+      <h2>Сводка по замерам</h2>
+      <div class="tbl-wrap" id="powerTable"></div>
+    </div>
+  </section>
+
+  <!-- ================= ДАННЫЕ ================= -->
+  <section class="panel" id="panel-data">
+    <div class="card">
+      <h2>Цели по ресурсам</h2>
+      <div class="frow" id="goalRow"></div>
+    </div>
+    <div class="card">
+      <h2>Резервная копия</h2>
+      <p class="hint">Данные живут в этом браузере (localStorage). Периодически копируйте выгрузку в надёжное место — например, в заметки или файл.</p>
+      <div class="frow" style="margin-bottom:10px">
+        <button class="btn ghost" id="exportBtn">Выгрузить в поле ниже</button>
+        <button class="btn ghost" id="copyBtn">Скопировать</button>
+        <button class="btn ghost" id="importBtn">Импортировать из поля</button>
+      </div>
+      <textarea id="ioArea" rows="8" placeholder="Сюда попадёт выгрузка JSON — или вставьте сюда сохранённую копию и нажмите «Импортировать»."></textarea>
+      <p class="note" id="ioNote"></p>
+    </div>
+    <div class="card">
+      <h2>Опасная зона</h2>
+      <div class="frow">
+        <button class="btn ghost" id="demoBtn">Загрузить пример данных</button>
+        <button class="btn ghost" id="wipeBtn" style="color:var(--critical); border-color:var(--critical)">Стереть всё</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+<div id="tip"></div>
+
+<script>
+'use strict';
+
+/* ============ данные ============ */
+const LS_KEY = 'clan-treasury-v1';
+const RES = [
+  { key: 'wood',  name: 'Дерево', var: '--wood'  },
+  { key: 'stone', name: 'Камень', var: '--stone' },
+  { key: 'iron',  name: 'Железо', var: '--iron'  },
+];
+const SLOT_VARS = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
+
+let state = load();
+function blank() {
+  return { goal: { wood: 50e6, stone: 50e6, iron: 50e6 }, members: [], deliveries: [], power: [] };
+}
+function load() {
+  try {
+    const raw = localStorage.getItem(LS_KEY);
+    if (!raw) return blank();
+    const s = JSON.parse(raw);
+    return Object.assign(blank(), s);
+  } catch (e) { return blank(); }
+}
+function save() { localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+/* ============ утилиты ============ */
+const nfFull = new Intl.NumberFormat('ru-RU');
+function fmtFull(n) { return nfFull.format(Math.round(n)); }
+function fmtShort(n) {
+  const a = Math.abs(n);
+  const f = (v) => (Math.round(v * 10) / 10).toLocaleString('ru-RU');
+  if (a >= 1e9) return f(n / 1e9) + ' млрд';
+  if (a >= 1e6) return f(n / 1e6) + ' млн';
+  if (a >= 1e3) return f(n / 1e3) + ' тыс.';
+  return fmtFull(n);
+}
+function parseAmount(str) {
+  if (!str) return NaN;
+  let s = String(str).trim().toLowerCase().replace(/\s+/g, '').replace(',', '.');
+  const m = s.match(/^([0-9]*\.?[0-9]+)(кк|к|k|м|m|б|b|млн|млрд|тыс\.?)?$/);
+  if (!m) return NaN;
+  let v = parseFloat(m[1]);
+  const suf = m[2] || '';
+  if (suf === 'к' || suf === 'k' || suf === 'тыс' || suf === 'тыс.') v *= 1e3;
+  else if (suf === 'кк' || suf === 'м' || suf === 'm' || suf === 'млн') v *= 1e6;
+  else if (suf === 'б' || suf === 'b' || suf === 'млрд') v *= 1e9;
+  return Math.round(v);
+}
+function todayStr() {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+const MONTHS = ['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'];
+function fmtDate(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  const now = new Date();
+  return d + ' ' + MONTHS[m - 1] + (y !== now.getFullYear() ? ' ' + y : '');
+}
+function daysAgo(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  const then = new Date(y, m - 1, d);
+  const now = new Date(); now.setHours(0, 0, 0, 0);
+  return Math.round((now - then) / 86400000);
+}
+function cssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function esc(s) { return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function member(id) { return state.members.find(m => m.id === id); }
+function memberName(id) { const m = member(id); return m ? m.name : '(удалён)'; }
+function activeMembers() { return state.members.filter(m => !m.archived).sort((a, b) => a.name.localeCompare(b.name, 'ru')); }
+function resMeta(key) { return RES.find(r => r.key === key); }
+
+function totals() {
+  const t = { wood: 0, stone: 0, iron: 0 };
+  for (const d of state.deliveries) t[d.res] += d.amount;
+  return t;
+}
+function totalsByMember() {
+  const map = new Map();
+  for (const d of state.deliveries) {
+    if (!map.has(d.mid)) map.set(d.mid, { wood: 0, stone: 0, iron: 0, total: 0, last: null });
+    const e = map.get(d.mid);
+    e[d.res] += d.amount; e.total += d.amount;
+    if (!e.last || d.date > e.last) e.last = d.date;
+  }
+  return map;
+}
+function latestPower(mid) {
+  let best = null;
+  for (const p of state.power) if (p.mid === mid && (!best || p.date > best.date)) best = p;
+  return best;
+}
+
+/* ============ вкладки ============ */
+document.getElementById('tabs').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  document.querySelectorAll('#tabs button').forEach(x => x.classList.toggle('on', x === b));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === 'panel-' + b.dataset.tab));
+});
+
+/* ============ карточки ресурсов ============ */
+function renderResCards() {
+  const t = totals();
+  const week = { wood: 0, stone: 0, iron: 0 };
+  for (const d of state.deliveries) if (daysAgo(d.date) <= 6) week[d.res] += d.amount;
+  const host = document.getElementById('resCards');
+  host.innerHTML = RES.map(r => {
+    const got = t[r.key], goal = state.goal[r.key] || 50e6;
+    const pct = Math.min(100, got / goal * 100);
+    const done = got >= goal;
+    const left = Math.max(0, goal - got);
+    return `<div class="res-card">
+      <div class="res-head">
+        <span class="res-dot" style="background:var(${r.var})"></span>
+        <span class="res-name">${r.name}</span>
+        ${done ? '<span class="res-done">✓ собрано</span>' : ''}
+      </div>
+      <div class="res-num">${fmtShort(got)} <small>из ${fmtShort(goal)}</small></div>
+      <div class="meter"><i class="${done ? 'full' : ''}" style="width:${pct.toFixed(2)}%; background:var(${r.var})"></i></div>
+      <div class="res-sub">
+        <span>${done ? 'цель достигнута' : 'осталось ' + fmtShort(left)}</span>
+        ${week[r.key] > 0 ? `<span class="d7">+${fmtShort(week[r.key])} за 7 дн.</span>` : '<span></span>'}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ============ форма обоза ============ */
+let dResPick = 'wood';
+function renderResSeg() {
+  const host = document.getElementById('dRes');
+  host.innerHTML = RES.map(r =>
+    `<button type="button" data-res="${r.key}" class="${dResPick === r.key ? 'on' : ''}">
+      <i class="res-dot" style="width:8px;height:8px;border-radius:50%;background:var(${r.var})"></i>${r.name}
+    </button>`).join('');
+}
+document.getElementById('dRes').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  dResPick = b.dataset.res; renderResSeg();
+});
+
+function fillMemberSelect(sel, withAll) {
+  const cur = sel.value;
+  const opts = activeMembers().map(m => `<option value="${m.id}">${esc(m.name)}</option>`).join('');
+  sel.innerHTML = (withAll ? '<option value="">— все —</option>' : '<option value="" disabled selected>выберите…</option>') + opts;
+  if (cur && [...sel.options].some(o => o.value === cur)) sel.value = cur;
+}
+
+document.getElementById('dAdd').addEventListener('click', () => {
+  const mid = document.getElementById('dMember').value;
+  const amount = parseAmount(document.getElementById('dAmount').value);
+  const date = document.getElementById('dDate').value || todayStr();
+  if (!mid) { alert('Выберите участника. Если список пуст — добавьте клан во вкладке «Участники».'); return; }
+  if (!(amount > 0)) { alert('Не понял количество. Примеры: 500000, 500к, 1.5м, 2кк.'); return; }
+  state.deliveries.push({ id: uid(), mid, res: dResPick, amount, date, note: document.getElementById('dNote').value.trim() });
+  save();
+  document.getElementById('dAmount').value = '';
+  document.getElementById('dNote').value = '';
+  renderAll();
+});
+
+/* ============ молчуны ============ */
+let silentDays = 7;
+document.getElementById('silentRange').addEventListener('click', (e) => {
+  const b = e.target.closest('button'); if (!b) return;
+  silentDays = Number(b.dataset.d); renderSilent();
+});
+function renderSilentSeg() {
+  document.getElementById('silentRange').innerHTML = [[7, '7 дней'], [14, '14 дней'], [0, 'вообще ни разу']]
+    .map(([d, l]) => `<button type="button" data-d="${d}" class="${silentDays === d ? 'on' : ''}">${l}</button>`).join('');
+}
+function renderSilent() {
+  renderSilentSeg();
+  const host = document.getElementById('silentList');
+  const byM = totalsByMember();
+  const list = activeMembers().filter(m => {
+    const e = byM.get(m.id);
+    if (!e) return true;
+    if (silentDays === 0) return false;
+    return daysAgo(e.last) > silentDays;
+  });
+  if (activeMembers().length === 0) { host.innerHTML = '<div class="empty">Справочник пуст — добавьте участников.</div>'; return; }
+  if (list.length === 0) { host.innerHTML = '<div class="allgood">✓ Все присылали — красота!</div>'; return; }
+  host.innerHTML = '<div class="silent-list">' + list.map(m => {
+    const e = byM.get(m.id);
+    const tag = e ? daysAgo(e.last) + ' дн. назад' : 'ни разу';
+    return `<span class="silent"><b>${esc(m.name)}</b><span>${tag}</span></span>`;
+  }).join('') + '</div>';
+}
+
+/* ============ лидеры ============ */
+function renderLeaders() {
+  const host = document.getElementById('leaders');
+  const byM = totalsByMember();
+  const rows = [...byM.entries()]
+    .map(([mid, e]) => ({ mid, ...e }))
+    .sort((a, b) => b.total - a.total)
+    .slice(0, 10);
+  if (rows.length === 0) { host.innerHTML = '<div class="empty">Пока ни одного обоза.</div>'; return; }
+  const max = rows[0].total;
+  host.innerHTML = rows.map(r => {
+    const segs = RES.filter(res => r[res.key] > 0).map(res =>
+      `<i style="flex:${r[res.key]}; background:var(${res.var})"
+          data-tt="${esc(memberName(r.mid))} — ${res.name}: ${fmtFull(r[res.key])}"></i>`).join('');
+    return `<div class="lead-row">
+      <div class="lead-name" title="${esc(memberName(r.mid))}">${esc(memberName(r.mid))}</div>
+      <div class="lead-bar" style="width:${(r.total / max * 100).toFixed(1)}%">${segs}</div>
+      <div class="lead-val">${fmtShort(r.total)}</div>
+    </div>`;
+  }).join('') +
+  `<div class="legend">` + RES.map(r =>
+    `<span class="chip"><i style="background:var(${r.var})"></i>${r.name}</span>`).join('') + `</div>`;
+}
+
+/* ============ журнал ============ */
+function renderLog() {
+  fillMemberSelect(document.getElementById('fMember'), true);
+  const fM = document.getElementById('fMember').value;
+  const fR = document.getElementById('fRes').value;
+  const rows = state.deliveries
+    .filter(d => (!fM || d.mid === fM) && (!fR || d.res === fR))
+    .sort((a, b) => b.date.localeCompare(a.date) || b.id.localeCompare(a.id));
+  const host = document.getElementById('logTable');
+  if (rows.length === 0) { host.innerHTML = '<div class="empty">Записей нет. Обозы, записанные выше, появятся здесь.</div>'; return; }
+  host.innerHTML = `<table>
+    <thead><tr><th>Дата</th><th>Участник</th><th>Ресурс</th><th class="num">Сколько</th><th>Заметка</th><th></th></tr></thead>
+    <tbody>` + rows.map(d => {
+      const r = resMeta(d.res);
+      return `<tr>
+        <td class="dt">${fmtDate(d.date)}</td>
+        <td>${esc(memberName(d.mid))}</td>
+        <td><span class="chip"><i style="background:var(${r.var})"></i>${r.name}</span></td>
+        <td class="num">${fmtFull(d.amount)}</td>
+        <td class="note">${esc(d.note || '')}</td>
+        <td><button class="btn danger small" data-del="${d.id}" title="Удалить запись">✕</button></td>
+      </tr>`;
+    }).join('') + `</tbody></table>`;
+}
+document.getElementById('logTable').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-del]'); if (!b) return;
+  const d = state.deliveries.find(x => x.id === b.dataset.del);
+  if (d && confirm(`Удалить обоз: ${memberName(d.mid)}, ${resMeta(d.res).name.toLowerCase()} ${fmtFull(d.amount)}?`)) {
+    state.deliveries = state.deliveries.filter(x => x.id !== d.id);
+    save(); renderAll();
+  }
+});
+document.getElementById('fMember').addEventListener('change', renderLog);
+document.getElementById('fRes').addEventListener('change', renderLog);
+
+/* ============ участники ============ */
+document.getElementById('mAdd').addEventListener('click', () => {
+  const raw = document.getElementById('mBulk').value;
+  const existing = new Set(state.members.map(m => m.name.toLowerCase()));
+  let added = 0;
+  for (let line of raw.split('\n')) {
+    let name = line.replace(/^\s*\d+[.)\s-]*/,'').trim();
+    if (!name) continue;
+    if (existing.has(name.toLowerCase())) continue;
+    state.members.push({ id: uid(), name, archived: false });
+    existing.add(name.toLowerCase());
+    added++;
+  }
+  if (added === 0) { alert('Не нашёл новых ников (пустые строки и дубли пропускаются).'); return; }
+  document.getElementById('mBulk').value = '';
+  save(); renderAll();
+});
+
+function renderMembers() {
+  const host = document.getElementById('memberTable');
+  const byM = totalsByMember();
+  const all = [...state.members].sort((a, b) => (a.archived - b.archived) || a.name.localeCompare(b.name, 'ru'));
+  if (all.length === 0) { host.innerHTML = '<div class="empty">Пока пусто. Вставьте список клана выше — хоть весь ростер разом.</div>'; return; }
+  host.innerHTML = `<table>
+    <thead><tr><th>Ник</th><th class="num">Дерево</th><th class="num">Камень</th><th class="num">Железо</th><th class="num">Всего</th><th>Последний обоз</th><th class="num">Могущество</th><th></th></tr></thead>
+    <tbody>` + all.map(m => {
+      const e = byM.get(m.id) || { wood: 0, stone: 0, iron: 0, total: 0, last: null };
+      const p = latestPower(m.id);
+      const dim = m.archived ? ' style="opacity:.5"' : '';
+      return `<tr${dim}>
+        <td>${esc(m.name)}${m.archived ? ' <span class="note">(в архиве)</span>' : ''}</td>
+        <td class="num">${e.wood ? fmtFull(e.wood) : '—'}</td>
+        <td class="num">${e.stone ? fmtFull(e.stone) : '—'}</td>
+        <td class="num">${e.iron ? fmtFull(e.iron) : '—'}</td>
+        <td class="num"><b>${e.total ? fmtFull(e.total) : '—'}</b></td>
+        <td class="dt">${e.last ? fmtDate(e.last) : '—'}</td>
+        <td class="num">${p ? fmtShort(p.value) : '—'}</td>
+        <td style="white-space:nowrap">
+          <button class="btn ghost small" data-ren="${m.id}">Ник</button>
+          <button class="btn ghost small" data-arc="${m.id}">${m.archived ? 'Вернуть' : 'В архив'}</button>
+          <button class="btn danger small" data-rm="${m.id}" title="Удалить">✕</button>
+        </td>
+      </tr>`;
+    }).join('') + `</tbody></table>`;
+}
+document.getElementById('memberTable').addEventListener('click', (e) => {
+  const ren = e.target.closest('[data-ren]');
+  const arc = e.target.closest('[data-arc]');
+  const rm = e.target.closest('[data-rm]');
+  if (ren) {
+    const m = member(ren.dataset.ren);
+    const name = prompt('Новый ник:', m.name);
+    if (name && name.trim()) { m.name = name.trim(); save(); renderAll(); }
+  } else if (arc) {
+    const m = member(arc.dataset.arc);
+    m.archived = !m.archived; save(); renderAll();
+  } else if (rm) {
+    const m = member(rm.dataset.rm);
+    const n = state.deliveries.filter(d => d.mid === m.id).length + state.power.filter(p => p.mid === m.id).length;
+    const msg = n > 0
+      ? `У «${m.name}» есть записи (${n} шт.) — они тоже удалятся. Если человек просто вышел из клана, лучше «В архив». Точно удалить?`
+      : `Удалить «${m.name}»?`;
+    if (confirm(msg)) {
+      state.members = state.members.filter(x => x.id !== m.id);
+      state.deliveries = state.deliveries.filter(d => d.mid !== m.id);
+      state.power = state.power.filter(p => p.mid !== m.id);
+      powerSel.delete(m.id);
+      save(); renderAll();
+    }
+  }
+});
+
+/* ============ могущество ============ */
+document.getElementById('pAdd').addEventListener('click', () => {
+  const mid = document.getElementById('pMember').value;
+  const value = parseAmount(document.getElementById('pValue').value);
+  const date = document.getElementById('pDate').value || todayStr();
+  if (!mid) { alert('Выберите участника.'); return; }
+  if (!(value > 0)) { alert('Не понял число. Примеры: 38.5м, 120кк, 1.2б.'); return; }
+  const dup = state.power.find(p => p.mid === mid && p.date === date);
+  if (dup) dup.value = value;
+  else state.power.push({ id: uid(), mid, value, date });
+  save();
+  document.getElementById('pValue').value = '';
+  powerSel.add(mid);
+  renderAll();
+});
+
+const powerSel = new Set();       // выбранные участники
+const slotByMid = new Map();      // участник → цветовой слот (стабилен в течение сессии)
+function slotFor(mid) {
+  if (!slotByMid.has(mid)) {
+    const used = new Set(slotByMid.values());
+    let s = SLOT_VARS.findIndex((_, i) => !used.has(i));
+    if (s < 0) s = slotByMid.size % SLOT_VARS.length;
+    slotByMid.set(mid, s);
+  }
+  return slotByMid.get(mid);
+}
+
+function powerMids() {
+  return [...new Set(state.power.map(p => p.mid))].filter(mid => member(mid));
+}
+function defaultPowerSel() {
+  const mids = powerMids()
+    .map(mid => ({ mid, v: latestPower(mid).value }))
+    .sort((a, b) => b.v - a.v)
+    .slice(0, 5);
+  mids.forEach(x => powerSel.add(x.mid));
+}
+
+function renderPowerPicks() {
+  const host = document.getElementById('powerPicks');
+  const mids = powerMids().sort((a, b) => memberName(a).localeCompare(memberName(b), 'ru'));
+  if (mids.length === 0) { host.innerHTML = ''; return; }
+  host.innerHTML = mids.map(mid => {
+    const on = powerSel.has(mid);
+    const dot = on ? `style="background:var(${SLOT_VARS[slotFor(mid)]})"` : '';
+    return `<button type="button" class="pick ${on ? 'on' : ''}" data-mid="${mid}"><i ${dot}></i>${esc(memberName(mid))}</button>`;
+  }).join('');
+}
+document.getElementById('powerPicks').addEventListener('click', (e) => {
+  const b = e.target.closest('[data-mid]'); if (!b) return;
+  const mid = b.dataset.mid;
+  if (powerSel.has(mid)) powerSel.delete(mid);
+  else if (powerSel.size >= 8) { alert('Не больше 8 линий на графике — снимите кого-нибудь.'); return; }
+  else powerSel.add(mid);
+  renderPower();
+});
+
+function renderPowerChart() {
+  const host = document.getElementById('powerChart');
+  const legend = document.getElementById('powerLegend');
+  const series = [...powerSel].filter(mid => member(mid)).map(mid => ({
+    mid,
+    color: cssVar(SLOT_VARS[slotFor(mid)]),
+    pts: state.power.filter(p => p.mid === mid).sort((a, b) => a.date.localeCompare(b.date)),
+  })).filter(s => s.pts.length > 0);
+
+  if (series.length === 0) {
+    host.innerHTML = '<div class="empty">Запишите замеры могущества — и выберите участников выше.</div>';
+    legend.innerHTML = ''; return;
+  }
+
+  const allDates = [...new Set(series.flatMap(s => s.pts.map(p => p.date)))].sort();
+  const toT = iso => { const [y, m, d] = iso.split('-').map(Number); return new Date(y, m - 1, d).getTime(); };
+  let t0 = toT(allDates[0]), t1 = toT(allDates[allDates.length - 1]);
+  if (t0 === t1) { t0 -= 86400000; t1 += 86400000; }
+  const vals = series.flatMap(s => s.pts.map(p => p.value));
+  let vMin = Math.min(...vals), vMax = Math.max(...vals);
+  const pad = (vMax - vMin) * 0.08 || vMax * 0.1 || 1;
+  vMin = Math.max(0, vMin - pad); vMax += pad;
+
+  const W = Math.max(560, Math.min(980, host.clientWidth || 720));
+  const H = 300, ML = 78, MR = series.length <= 4 ? 110 : 16, MT = 12, MB = 28;
+  const iw = W - ML - MR, ih = H - MT - MB;
+  const X = t => ML + (t - t0) / (t1 - t0) * iw;
+  const Y = v => MT + (1 - (v - vMin) / (vMax - vMin)) * ih;
+
+  let g = '';
+  const yTicks = 4;
+  for (let i = 0; i <= yTicks; i++) {
+    const v = vMin + (vMax - vMin) * i / yTicks;
+    const y = Y(v);
+    g += `<line x1="${ML}" y1="${y}" x2="${W - MR}" y2="${y}" stroke="var(--grid)" stroke-width="1"/>`;
+    g += `<text x="${ML - 8}" y="${y + 3.5}" text-anchor="end">${fmtShort(v)}</text>`;
+  }
+  const tickDates = allDates.length <= 6 ? allDates : allDates.filter((_, i) => i % Math.ceil(allDates.length / 6) === 0);
+  for (const dt of tickDates) {
+    g += `<text x="${X(toT(dt))}" y="${H - 8}" text-anchor="middle">${fmtDate(dt)}</text>`;
+  }
+  g += `<line x1="${ML}" y1="${MT + ih}" x2="${W - MR}" y2="${MT + ih}" stroke="var(--baseline)" stroke-width="1"/>`;
+
+  let lines = '';
+  for (const s of series) {
+    const d = s.pts.map((p, i) => (i ? 'L' : 'M') + X(toT(p.date)).toFixed(1) + ' ' + Y(p.value).toFixed(1)).join(' ');
+    lines += `<path d="${d}" fill="none" stroke="${s.color}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>`;
+    if (s.pts.length === 1) {
+      const p = s.pts[0];
+      lines += `<circle cx="${X(toT(p.date))}" cy="${Y(p.value)}" r="4" fill="${s.color}" stroke="var(--surface)" stroke-width="2"/>`;
+    }
+    if (series.length <= 4) {
+      const last = s.pts[s.pts.length - 1];
+      lines += `<text class="dl" x="${X(toT(last.date)) + 8}" y="${Y(last.value) + 4}" fill="${s.color}">${esc(memberName(s.mid))}</text>`;
+    }
+  }
+
+  host.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="height:auto; display:block" id="powerSvg" role="img"
+      aria-label="График роста могущества по датам">${g}${lines}
+      <g id="hoverG" style="display:none">
+        <line id="hoverLine" y1="${MT}" y2="${MT + ih}" stroke="var(--baseline)" stroke-width="1" stroke-dasharray="3 3"/>
+      </g>
+      <rect id="hoverZone" x="${ML}" y="${MT}" width="${iw}" height="${ih}" fill="transparent"/>
+    </svg>`;
+  legend.innerHTML = series.map(s =>
+    `<span class="chip"><i style="background:${s.color}"></i>${esc(memberName(s.mid))}</span>`).join('');
+
+  /* --- ховер: перекрестие + подсказка --- */
+  const svg = document.getElementById('powerSvg');
+  const zone = document.getElementById('hoverZone');
+  const hoverG = document.getElementById('hoverG');
+  const hoverLine = document.getElementById('hoverLine');
+  const tip = document.getElementById('tip');
+  const dateTs = allDates.map(toT);
+  zone.addEventListener('mousemove', (e) => {
+    const r = svg.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width * W;
+    const t = t0 + (px - ML) / iw * (t1 - t0);
+    let bi = 0;
+    for (let i = 1; i < dateTs.length; i++) if (Math.abs(dateTs[i] - t) < Math.abs(dateTs[bi] - t)) bi = i;
+    const dt = allDates[bi];
+    const x = X(dateTs[bi]);
+    hoverG.style.display = '';
+    hoverLine.setAttribute('x1', x); hoverLine.setAttribute('x2', x);
+    [...hoverG.querySelectorAll('circle')].forEach(c => c.remove());
+    let rows = '';
+    for (const s of series) {
+      const p = s.pts.find(pp => pp.date === dt);
+      if (!p) continue;
+      const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      c.setAttribute('cx', x); c.setAttribute('cy', Y(p.value)); c.setAttribute('r', 4);
+      c.setAttribute('fill', s.color); c.setAttribute('stroke', 'var(--surface)'); c.setAttribute('stroke-width', 2);
+      hoverG.appendChild(c);
+      rows += `<div class="t-r"><i style="background:${s.color}"></i>${esc(memberName(s.mid))}<b>${fmtShort(p.value)}</b></div>`;
+    }
+    tip.innerHTML = `<div class="t-h">${fmtDate(dt)}</div>` + (rows || '<div class="t-r">нет замеров в эту дату</div>');
+    tip.style.display = 'block';
+    tip.style.left = Math.min(e.clientX + 14, window.innerWidth - 280) + 'px';
+    tip.style.top = (e.clientY + 14) + 'px';
+  });
+  zone.addEventListener('mouseleave', () => {
+    hoverG.style.display = 'none';
+    document.getElementById('tip').style.display = 'none';
+  });
+}
+
+function renderPowerTable() {
+  const host = document.getElementById('powerTable');
+  const mids = powerMids();
+  if (mids.length === 0) { host.innerHTML = '<div class="empty">Замеров пока нет.</div>'; return; }
+  const rows = mids.map(mid => {
+    const pts = state.power.filter(p => p.mid === mid).sort((a, b) => a.date.localeCompare(b.date));
+    const first = pts[0], last = pts[pts.length - 1];
+    const diff = last.value - first.value;
+    const pct = first.value > 0 ? diff / first.value * 100 : 0;
+    return { mid, first, last, diff, pct, n: pts.length };
+  }).sort((a, b) => b.last.value - a.last.value);
+  host.innerHTML = `<table>
+    <thead><tr><th>Участник</th><th class="num">Сейчас</th><th class="num">Первый замер</th><th class="num">Прирост</th><th class="num">Прирост, %</th><th class="num">Замеров</th></tr></thead>
+    <tbody>` + rows.map(r => `<tr>
+      <td>${esc(memberName(r.mid))}</td>
+      <td class="num"><b>${fmtShort(r.last.value)}</b></td>
+      <td class="num">${fmtShort(r.first.value)} <span class="note">(${fmtDate(r.first.date)})</span></td>
+      <td class="num ${r.diff > 0 ? 'growth-up' : 'growth-flat'}">${r.diff > 0 ? '+' : ''}${fmtShort(r.diff)}</td>
+      <td class="num ${r.diff > 0 ? 'growth-up' : 'growth-flat'}">${r.n > 1 ? (r.pct > 0 ? '+' : '') + (Math.round(r.pct * 10) / 10).toLocaleString('ru-RU') + '%' : '—'}</td>
+      <td class="num">${r.n}</td>
+    </tr>`).join('') + `</tbody></table>`;
+}
+
+function renderPower() {
+  if (powerSel.size === 0) defaultPowerSel();
+  for (const mid of [...powerSel]) if (!member(mid) || !state.power.some(p => p.mid === mid)) powerSel.delete(mid);
+  renderPowerPicks();
+  renderPowerChart();
+  renderPowerTable();
+}
+
+/* ============ подсказки для баров лидеров ============ */
+document.getElementById('leaders').addEventListener('mousemove', (e) => {
+  const seg = e.target.closest('[data-tt]');
+  const tip = document.getElementById('tip');
+  if (!seg) { tip.style.display = 'none'; return; }
+  tip.textContent = seg.dataset.tt;
+  tip.style.display = 'block';
+  tip.style.left = Math.min(e.clientX + 14, window.innerWidth - 280) + 'px';
+  tip.style.top = (e.clientY + 14) + 'px';
+});
+document.getElementById('leaders').addEventListener('mouseleave', () => {
+  document.getElementById('tip').style.display = 'none';
+});
+
+/* ============ данные: цели, экспорт/импорт ============ */
+function renderGoals() {
+  const host = document.getElementById('goalRow');
+  host.innerHTML = RES.map(r => `<div class="field">
+      <label>${r.name}</label>
+      <input type="text" data-goal="${r.key}" value="${fmtShort(state.goal[r.key])}" size="10">
+    </div>`).join('') + `<button class="btn ghost" id="goalSave">Сохранить цели</button>`;
+  document.getElementById('goalSave').addEventListener('click', () => {
+    for (const inp of host.querySelectorAll('[data-goal]')) {
+      const v = parseAmount(inp.value.replace(/\s/g, '').replace('млн', 'м').replace('млрд', 'б').replace('тыс.', 'к'));
+      if (v > 0) state.goal[inp.dataset.goal] = v;
+    }
+    save(); renderAll();
+  });
+}
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  document.getElementById('ioArea').value = JSON.stringify(state, null, 1);
+  document.getElementById('ioNote').textContent = 'Выгружено: участников ' + state.members.length +
+    ', обозов ' + state.deliveries.length + ', замеров ' + state.power.length + '. Скопируйте и сохраните.';
+});
+document.getElementById('copyBtn').addEventListener('click', async () => {
+  const ta = document.getElementById('ioArea');
+  if (!ta.value) ta.value = JSON.stringify(state, null, 1);
+  ta.select();
+  try { await navigator.clipboard.writeText(ta.value); document.getElementById('ioNote').textContent = 'Скопировано в буфер обмена.'; }
+  catch (e) { document.getElementById('ioNote').textContent = 'Не удалось скопировать автоматически — выделите текст и скопируйте вручную.'; }
+});
+document.getElementById('importBtn').addEventListener('click', () => {
+  const raw = document.getElementById('ioArea').value.trim();
+  if (!raw) { alert('Поле пустое — вставьте сохранённую выгрузку JSON.'); return; }
+  let s;
+  try { s = JSON.parse(raw); } catch (e) { alert('Это не похоже на выгрузку: JSON не читается.'); return; }
+  if (!s || !Array.isArray(s.members) || !Array.isArray(s.deliveries)) { alert('В выгрузке нет ожидаемых данных (members / deliveries).'); return; }
+  if (!confirm('Импорт заменит все текущие данные (участников ' + state.members.length + ', обозов ' + state.deliveries.length + '). Продолжить?')) return;
+  state = Object.assign(blank(), s);
+  powerSel.clear(); slotByMid.clear();
+  save(); renderAll();
+  document.getElementById('ioNote').textContent = 'Импортировано.';
+});
+
+document.getElementById('wipeBtn').addEventListener('click', () => {
+  if (!confirm('Стереть ВСЕ данные (участников, обозы, замеры)? Отменить будет нельзя.')) return;
+  if (!confirm('Точно-точно? Если сомневаетесь, сначала сделайте выгрузку.')) return;
+  state = blank(); powerSel.clear(); slotByMid.clear();
+  save(); renderAll();
+});
+
+document.getElementById('demoBtn').addEventListener('click', () => {
+  if (state.members.length > 0 && !confirm('Пример добавится к текущим данным. Продолжить?')) return;
+  const names = ['Воевода', 'Медведь', 'Тихий_Дон', 'Ярослава', 'Кузнец77'];
+  const mids = names.map(n => {
+    const ex = state.members.find(m => m.name === n);
+    if (ex) return ex.id;
+    const m = { id: uid(), name: n, archived: false };
+    state.members.push(m); return m.id;
+  });
+  const day = ms => { const d = new Date(Date.now() - ms * 86400000);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+  const resKeys = ['wood', 'stone', 'iron'];
+  for (let i = 0; i < 26; i++) {
+    state.deliveries.push({
+      id: uid(), mid: mids[i % 4], res: resKeys[i % 3],
+      amount: [500e3, 1.2e6, 800e3, 2e6, 350e3][i % 5],
+      date: day(13 - (i % 14)), note: '',
+    });
+  }
+  mids.forEach((mid, mi) => {
+    [21, 14, 7, 0].forEach((back, step) => {
+      const base = (20 + mi * 9) * 1e6;
+      state.power.push({ id: uid(), mid, value: Math.round(base * (1 + step * (0.04 + mi * 0.012))), date: day(back) });
+    });
+  });
+  save(); renderAll();
+});
+
+/* ============ общий рендер ============ */
+function renderAll() {
+  renderResCards();
+  renderResSeg();
+  fillMemberSelect(document.getElementById('dMember'), false);
+  fillMemberSelect(document.getElementById('pMember'), false);
+  renderSilent();
+  renderLeaders();
+  renderLog();
+  renderMembers();
+  renderPower();
+  renderGoals();
+}
+
+document.getElementById('dDate').value = todayStr();
+document.getElementById('pDate').value = todayStr();
+renderAll();
+window.addEventListener('resize', () => renderPowerChart());
+</script>
+</body>
+</html>
