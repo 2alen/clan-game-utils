@@ -315,11 +315,11 @@
   <section class="panel" id="panel-members">
     <div class="card">
       <h2>Добавить участников</h2>
-      <p class="hint">Можно вставить сразу список — по одному нику на строку (номера и точки в начале строк отбрасываются, так что список со скриншота ростера подойдёт как есть).</p>
+      <p class="hint">Вставьте список — по одному на строку. Понимает и просто ники, и выгрузку ростера в формате <b>ник | уровень | могущество</b>. Повторная вставка свежего ростера обновит уровни и запишет новые замеры могущества на сегодняшнюю дату.</p>
       <div class="frow">
         <div class="field" style="flex:1; min-width:220px">
-          <label for="mBulk">Ники</label>
-          <textarea id="mBulk" rows="3" placeholder="Воевода&#10;2. Медведь&#10;3. Тихий_Дон"></textarea>
+          <label for="mBulk">Ники (или ростер целиком)</label>
+          <textarea id="mBulk" rows="3" placeholder="Doukree | 37 | 534,623&#10;Dukhn | 16 | 216,719&#10;или просто ник на строку"></textarea>
         </div>
         <button class="btn" id="mAdd">Добавить</button>
       </div>
@@ -407,18 +407,84 @@ const RES = [
 ];
 const SLOT_VARS = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
 
-let state = load();
 function blank() {
   return { goal: { wood: 50e6, stone: 50e6, iron: 50e6 }, members: [], deliveries: [], power: [] };
 }
-function load() {
+
+/* стартовый ростер клана — используется при первом открытии, пока нет своих данных */
+const SEED_ROSTER = `Doukree | 37 | 534,623
+Dukhn | 16 | 216,719
+Fordrellador | 14 | 168,082
+Aybrineyl | 29 | 636,272
+Kelegon | 20 | 243,566
+Mazuzahn | 14 | 347,590
+DutyNhonor | 15 | 295,505
+Nerdailas | 18 | 235,318
+Thordirn | 15 | 213,447
+Bein | 11 | 203,163
+Blondiespeedracr | 14 | 111,423
+Artsakh | 13 | 111,332
+Dagore | 12 | 108,057
+Lirosin | 11 | 97,323
+Lorbrinir | 14 | 95,460
+Eyloten | 12 | 87,941
+Eydanen | 12 | 87,211
+Ceretius | 11 | 86,999
+Envening | 12 | 81,495
+Orofed | 11 | 78,745
+Tuzshura | 11 | 78,157
+Digol | 11 | 72,319
+Tomuro | 12 | 70,327
+Brainmin | 11 | 65,739
+Sirarad | 10 | 65,077
+Darineyl | 11 | 61,733
+Legon | 11 | 60,240
+Aydael | 11 | 58,555
+Mazalago | 11 | 57,402
+Ariron | 10 | 54,887
+Lorbriman | 10 | 54,865
+Earninef | 10 | 54,225
+Halubrad | 10 | 52,682
+Tautaur | 9 | 50,491
+Celune | 11 | 48,580
+Lefinin | 11 | 48,207
+Taugal | 11 | 48,206
+Finros | 10 | 47,570
+Argoleyl | 9 | 45,273
+Amaror | 10 | 40,148
+Saldaning | 10 | 39,851
+Adorazius | 11 | 37,309
+Floyergus | 10 | 36,975
+Tygradi | 10 | 36,127
+Galafirilas | 9 | 34,922
+Dacage | 9 | 34,646
+Manabandis | 9 | 32,668
+Babelle | 9 | 27,750
+Nerneilas | 9 | 27,122
+Gushicage | 9 | 25,709
+Lirafin | 9 | 24,563
+Megin | 9 | 22,305
+Tagore | 8 | 18,435
+Funfiren | 9 | 18,354
+Maedrosor | 8 | 18,273
+Tefur | 9 | 18,241
+Niran | 8 | 16,371
+Deli | 7 | 14,412
+Rainterror | 6 | 11,117`;
+
+let state = blank();
+(function init() {
   try {
     const raw = localStorage.getItem(LS_KEY);
-    if (!raw) return blank();
-    const s = JSON.parse(raw);
-    return Object.assign(blank(), s);
-  } catch (e) { return blank(); }
-}
+    if (raw) {
+      const s = JSON.parse(raw);
+      state = Object.assign(blank(), s);
+      if (state.members.length || state.deliveries.length || state.power.length) return;
+    }
+  } catch (e) { state = blank(); }
+  importRoster(SEED_ROSTER, todayStr());
+  save();
+})();
 function save() { localStorage.setItem(LS_KEY, JSON.stringify(state)); }
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
@@ -444,6 +510,45 @@ function parseAmount(str) {
   else if (suf === 'кк' || suf === 'м' || suf === 'm' || suf === 'млн') v *= 1e6;
   else if (suf === 'б' || suf === 'b' || suf === 'млрд') v *= 1e9;
   return Math.round(v);
+}
+function parseRosterNum(x) {
+  const c = String(x).replace(/\s/g, '');
+  if (/^\d{1,3}(?:,\d{3})+$/.test(c)) return Number(c.replace(/,/g, ''));
+  return parseAmount(c);
+}
+/* строка ростера: «ник», «ник | уровень», «ник | уровень | могущество» (разделители | ; или таб) */
+function importRoster(raw, date) {
+  const seen = new Set();
+  const res = { added: 0, updated: 0, dups: [] };
+  for (const line of raw.split('\n')) {
+    const s = line.replace(/^\s*\d+[.)]\s*/, '').trim();
+    if (!s) continue;
+    const parts = s.split(/[|\t;]+/).map(x => x.trim()).filter(Boolean);
+    const name = parts[0];
+    if (!name) continue;
+    const key = name.toLowerCase();
+    if (seen.has(key)) { res.dups.push(name); continue; }
+    seen.add(key);
+    let level = null, power = null;
+    if (parts.length >= 2) {
+      if (/^\d{1,3}$/.test(parts[1])) level = parseInt(parts[1], 10);
+      else { const pw = parseRosterNum(parts[1]); if (pw > 0) power = pw; }
+    }
+    if (parts.length >= 3 && power === null) {
+      const pw = parseRosterNum(parts[2]);
+      if (pw > 0) power = pw;
+    }
+    let m = state.members.find(x => x.name.toLowerCase() === key);
+    if (m) res.updated++;
+    else { m = { id: uid(), name, archived: false }; state.members.push(m); res.added++; }
+    if (level !== null) m.level = level;
+    if (power !== null) {
+      const dup = state.power.find(p => p.mid === m.id && p.date === date);
+      if (dup) dup.value = power;
+      else state.power.push({ id: uid(), mid: m.id, value: power, date });
+    }
+  }
+  return res;
 }
 function todayStr() {
   const d = new Date();
@@ -648,19 +753,14 @@ document.getElementById('fRes').addEventListener('change', renderLog);
 /* ============ участники ============ */
 document.getElementById('mAdd').addEventListener('click', () => {
   const raw = document.getElementById('mBulk').value;
-  const existing = new Set(state.members.map(m => m.name.toLowerCase()));
-  let added = 0;
-  for (let line of raw.split('\n')) {
-    let name = line.replace(/^\s*\d+[.)\s-]*/,'').trim();
-    if (!name) continue;
-    if (existing.has(name.toLowerCase())) continue;
-    state.members.push({ id: uid(), name, archived: false });
-    existing.add(name.toLowerCase());
-    added++;
-  }
-  if (added === 0) { alert('Не нашёл новых ников (пустые строки и дубли пропускаются).'); return; }
+  if (!raw.trim()) { alert('Вставьте список ников или ростер.'); return; }
+  const r = importRoster(raw, todayStr());
+  if (r.added === 0 && r.updated === 0) { alert('Не нашёл ни одного ника в тексте.'); return; }
   document.getElementById('mBulk').value = '';
   save(); renderAll();
+  let msg = 'Добавлено новых: ' + r.added + ', обновлено: ' + r.updated + '.';
+  if (r.dups.length) msg += '\nПовторы в списке пропущены: ' + r.dups.join(', ') + '.';
+  alert(msg);
 });
 
 function renderMembers() {
@@ -669,13 +769,14 @@ function renderMembers() {
   const all = [...state.members].sort((a, b) => (a.archived - b.archived) || a.name.localeCompare(b.name, 'ru'));
   if (all.length === 0) { host.innerHTML = '<div class="empty">Пока пусто. Вставьте список клана выше — хоть весь ростер разом.</div>'; return; }
   host.innerHTML = `<table>
-    <thead><tr><th>Ник</th><th class="num">Дерево</th><th class="num">Камень</th><th class="num">Железо</th><th class="num">Всего</th><th>Последний обоз</th><th class="num">Могущество</th><th></th></tr></thead>
+    <thead><tr><th>Ник</th><th class="num">Ур.</th><th class="num">Дерево</th><th class="num">Камень</th><th class="num">Железо</th><th class="num">Всего</th><th>Последний обоз</th><th class="num">Могущество</th><th></th></tr></thead>
     <tbody>` + all.map(m => {
       const e = byM.get(m.id) || { wood: 0, stone: 0, iron: 0, total: 0, last: null };
       const p = latestPower(m.id);
       const dim = m.archived ? ' style="opacity:.5"' : '';
       return `<tr${dim}>
         <td>${esc(m.name)}${m.archived ? ' <span class="note">(в архиве)</span>' : ''}</td>
+        <td class="num">${m.level || '—'}</td>
         <td class="num">${e.wood ? fmtFull(e.wood) : '—'}</td>
         <td class="num">${e.stone ? fmtFull(e.stone) : '—'}</td>
         <td class="num">${e.iron ? fmtFull(e.iron) : '—'}</td>
