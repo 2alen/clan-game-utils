@@ -431,6 +431,7 @@ Lorbrinir | 14 | 95,460
 Eyloten | 12 | 87,941
 Eydanen | 12 | 87,211
 Ceretius | 11 | 86,999
+Ceretius-2 | 10 | 41,988
 Envening | 12 | 81,495
 Orodfed | 11 | 78,745
 Tuzshura | 11 | 78,157
@@ -481,9 +482,17 @@ let state = blank();
       const s = JSON.parse(raw);
       state = Object.assign(blank(), s);
       if (state.members.length || state.deliveries.length || state.power.length) {
-        /* разовое исправление опечатки в стартовом ростере */
+        /* разовые исправления стартового ростера */
         const typo = state.members.find(m => m.name === 'Orofed');
         if (typo && !state.members.some(m => m.name === 'Orodfed')) { typo.name = 'Orodfed'; save(); }
+        state.fixups = state.fixups || {};
+        if (!state.fixups.ceretius2 && !state.members.some(m => m.name === 'Ceretius-2')) {
+          /* в клане два игрока с ником Ceretius — второй заведён как Ceretius-2 */
+          const m2 = { id: uid(), name: 'Ceretius-2', archived: false, level: 10 };
+          state.members.push(m2);
+          state.power.push({ id: uid(), mid: m2.id, value: 41988, date: todayStr() });
+          state.fixups.ceretius2 = true; save();
+        }
         return;
       }
     }
