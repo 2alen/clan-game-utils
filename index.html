@@ -219,6 +219,7 @@
   #tip .t-r b { margin-left: auto; padding-left: 12px; color: var(--ink); font-variant-numeric: tabular-nums; }
   #tip .t-r i { width: 7px; height: 7px; border-radius: 50%; flex: none; }
 
+  .rank-sel { font-size: 12.5px; padding: 4px 6px; border-radius: 6px; }
   .empty { color: var(--muted); font-size: 14px; padding: 18px 4px; text-align: center; }
   .note { font-size: 12.5px; color: var(--muted); }
   .growth-up { color: var(--good); font-weight: 600; }
@@ -315,7 +316,7 @@
   <section class="panel" id="panel-members">
     <div class="card">
       <h2>Добавить участников</h2>
-      <p class="hint">Вставьте список — по одному на строку. Понимает и просто ники, и выгрузку ростера в формате <b>ник | уровень | могущество</b>. Повторная вставка свежего ростера обновит уровни и запишет новые замеры могущества на сегодняшнюю дату.</p>
+      <p class="hint">Вставьте список — по одному на строку. Понимает и просто ники, и выгрузку ростера в формате <b>ник | уровень | могущество | звание</b> (звание — Leader / Superior / Officer / Veteran / Soldier, можно опускать). Повторная вставка свежего ростера обновит уровни и звания и запишет новые замеры могущества на сегодняшнюю дату.</p>
       <div class="frow">
         <div class="field" style="flex:1; min-width:220px">
           <label for="mBulk">Ники (или ростер целиком)</label>
@@ -407,72 +408,90 @@ const RES = [
   { key: 'iron',  name: 'Железо', var: '--iron'  },
 ];
 const SLOT_VARS = ['--s1','--s2','--s3','--s4','--s5','--s6','--s7','--s8'];
+const RANKS = [
+  { key: 'leader',   label: 'Leader'   },
+  { key: 'superior', label: 'Superior' },
+  { key: 'officer',  label: 'Officer'  },
+  { key: 'veteran',  label: 'Veteran'  },
+  { key: 'soldier',  label: 'Soldier'  },
+];
+function parseRank(s) {
+  const t = String(s).trim().toLowerCase();
+  if (/^(leader|лидер)/.test(t)) return 'leader';
+  if (/^(superior|приближ|зам)/.test(t)) return 'superior';
+  if (/^(officer|офицер)/.test(t)) return 'officer';
+  if (/^(veteran|ветеран)/.test(t)) return 'veteran';
+  if (/^(soldier|солдат)/.test(t)) return 'soldier';
+  return null;
+}
+function rankIdx(m) { const i = RANKS.findIndex(r => r.key === m.rank); return i < 0 ? 99 : i; }
+function rankLabel(key) { const r = RANKS.find(x => x.key === key); return r ? r.label : '—'; }
 
 function blank() {
   return { goal: { wood: 50e6, stone: 50e6, iron: 50e6 }, members: [], deliveries: [], power: [] };
 }
 
 /* стартовый ростер клана — используется при первом открытии, пока нет своих данных */
-const SEED_ROSTER = `Doukree | 37 | 534,623
-Dukhn | 16 | 216,719
-Fordrellador | 14 | 168,082
-Aybrineyl | 29 | 636,272
-Kelegon | 20 | 243,566
-Mazuzahn | 14 | 347,590
-DutyNhonor | 15 | 295,505
-Nerdailas | 18 | 235,318
-Thordirn | 15 | 213,447
-Bein | 11 | 203,163
-Blondiespeedracr | 14 | 111,423
-Artsakh | 13 | 111,332
-Dagore | 12 | 108,057
-Lirosin | 11 | 97,323
-Lorbrinir | 14 | 95,460
-Eyloten | 12 | 87,941
-Eydanen | 12 | 87,211
-Ceretius | 11 | 86,999
-Ceretius-2 | 10 | 41,988
-Envening | 12 | 81,495
-Orodfed | 11 | 78,745
-Tuzshura | 11 | 78,157
-Digol | 11 | 72,319
-Tomuro | 12 | 70,327
-Brainmin | 11 | 65,739
-Sirarad | 10 | 65,077
-Darineyl | 11 | 61,733
-Legon | 11 | 60,240
-Aydael | 11 | 58,555
-Mazalago | 11 | 57,402
-Ariron | 10 | 54,887
-Lorbriman | 10 | 54,865
-Earninef | 10 | 54,225
-Halubrad | 10 | 52,682
-Tautaur | 9 | 50,491
-Celune | 11 | 48,580
-Lefinin | 11 | 48,207
-Taugal | 11 | 48,206
-Finros | 10 | 47,570
-Argoleyl | 9 | 45,273
-Amaror | 10 | 40,148
-Saldaning | 10 | 39,851
-Adorazius | 11 | 37,309
-Floyergus | 10 | 36,975
-Tygradi | 10 | 36,127
-Galafirilas | 9 | 34,922
-Dacage | 9 | 34,646
-Manabandis | 9 | 32,668
-Babelle | 9 | 27,750
-Nerneilas | 9 | 27,122
-Gushicage | 9 | 25,709
-Lirafin | 9 | 24,563
-Megin | 9 | 22,305
-Tagore | 8 | 18,435
-Funfiren | 9 | 18,354
-Maedrosor | 8 | 18,273
-Tefur | 9 | 18,241
-Niran | 8 | 16,371
-Deli | 7 | 14,412
-Rainterror | 6 | 11,117`;
+const SEED_ROSTER = `Doukree | 37 | 534,623 | Leader
+Dukhn | 16 | 216,719 | Superior
+Fordrellador | 14 | 168,082 | Superior
+Aybrineyl | 29 | 636,272 | Officer
+Kelegon | 20 | 243,566 | Officer
+Mazuzahn | 14 | 347,590 | Veteran
+DutyNhonor | 15 | 295,505 | Veteran
+Nerdailas | 18 | 235,318 | Veteran
+Thordirn | 15 | 213,447 | Veteran
+Bein | 11 | 203,163 | Veteran
+Blondiespeedracr | 14 | 111,423 | Veteran
+Artsakh | 13 | 111,332 | Veteran
+Dagore | 12 | 108,057 | Veteran
+Lirosin | 11 | 97,323 | Soldier
+Lorbrinir | 14 | 95,460 | Soldier
+Eyloten | 12 | 87,941 | Soldier
+Eydanen | 12 | 87,211 | Soldier
+Ceretius | 11 | 86,999 | Soldier
+Ceretius-2 | 10 | 41,988 | Soldier
+Envening | 12 | 81,495 | Soldier
+Orodfed | 11 | 78,745 | Officer
+Tuzshura | 11 | 78,157 | Officer
+Digol | 11 | 72,319 | Soldier
+Tomuro | 12 | 70,327 | Veteran
+Brainmin | 11 | 65,739 | Soldier
+Sirarad | 10 | 65,077 | Soldier
+Darineyl | 11 | 61,733 | Soldier
+Legon | 11 | 60,240 | Soldier
+Aydael | 11 | 58,555 | Soldier
+Mazalago | 11 | 57,402 | Soldier
+Ariron | 10 | 54,887 | Soldier
+Lorbriman | 10 | 54,865 | Soldier
+Earninef | 10 | 54,225 | Soldier
+Halubrad | 10 | 52,682 | Soldier
+Tautaur | 9 | 50,491 | Soldier
+Celune | 11 | 48,580 | Soldier
+Lefinin | 11 | 48,207 | Soldier
+Taugal | 11 | 48,206 | Soldier
+Finros | 10 | 47,570 | Soldier
+Argoleyl | 9 | 45,273 | Soldier
+Amaror | 10 | 40,148 | Soldier
+Saldaning | 10 | 39,851 | Soldier
+Adorazius | 11 | 37,309 | Soldier
+Floyergus | 10 | 36,975 | Soldier
+Tygradi | 10 | 36,127 | Soldier
+Galafirilas | 9 | 34,922 | Soldier
+Dacage | 9 | 34,646 | Soldier
+Manabandis | 9 | 32,668 | Veteran
+Babelle | 9 | 27,750 | Soldier
+Nerneilas | 9 | 27,122 | Soldier
+Gushicage | 9 | 25,709 | Soldier
+Lirafin | 9 | 24,563 | Soldier
+Megin | 9 | 22,305 | Soldier
+Tagore | 8 | 18,435 | Soldier
+Funfiren | 9 | 18,354 | Soldier
+Maedrosor | 8 | 18,273 | Soldier
+Tefur | 9 | 18,241 | Soldier
+Niran | 8 | 16,371 | Soldier
+Deli | 7 | 14,412 | Soldier
+Rainterror | 6 | 11,117 | Soldier`;
 
 let state = blank();
 (function init() {
@@ -492,6 +511,15 @@ let state = blank();
           state.members.push(m2);
           state.power.push({ id: uid(), mid: m2.id, value: 41988, date: todayStr() });
           state.fixups.ceretius2 = true; save();
+        }
+        if (!state.fixups.ranks) {
+          /* разовое проставление званий из стартового ростера */
+          for (const line of SEED_ROSTER.split('\n')) {
+            const parts = line.split('|').map(x => x.trim());
+            const m = state.members.find(x => x.name.toLowerCase() === parts[0].toLowerCase());
+            if (m && !m.rank && parts[3]) m.rank = parseRank(parts[3]);
+          }
+          state.fixups.ranks = true; save();
         }
         return;
       }
@@ -544,19 +572,19 @@ function importRoster(raw, date) {
     const key = name.toLowerCase();
     if (seen.has(key)) { res.dups.push(name); continue; }
     seen.add(key);
-    let level = null, power = null;
-    if (parts.length >= 2) {
-      if (/^\d{1,3}$/.test(parts[1])) level = parseInt(parts[1], 10);
-      else { const pw = parseRosterNum(parts[1]); if (pw > 0) power = pw; }
-    }
-    if (parts.length >= 3 && power === null) {
-      const pw = parseRosterNum(parts[2]);
-      if (pw > 0) power = pw;
+    let level = null, power = null, rank = null;
+    for (const part of parts.slice(1)) {
+      const r = parseRank(part);
+      if (r) { if (rank === null) rank = r; continue; }
+      if (/^\d{1,3}$/.test(part)) { if (level === null) level = parseInt(part, 10); continue; }
+      const pw = parseRosterNum(part);
+      if (pw > 0 && power === null) power = pw;
     }
     let m = state.members.find(x => x.name.toLowerCase() === key);
     if (m) res.updated++;
     else { m = { id: uid(), name, archived: false }; state.members.push(m); res.added++; }
     if (level !== null) m.level = level;
+    if (rank !== null) m.rank = rank;
     if (power !== null) {
       const dup = state.power.find(p => p.mid === m.id && p.date === date);
       if (dup) dup.value = power;
@@ -781,16 +809,21 @@ document.getElementById('mAdd').addEventListener('click', () => {
 function renderMembers() {
   const host = document.getElementById('memberTable');
   const byM = totalsByMember();
-  const all = [...state.members].sort((a, b) => (a.archived - b.archived) || a.name.localeCompare(b.name, 'ru'));
+  const all = [...state.members].sort((a, b) =>
+    (a.archived - b.archived) || (rankIdx(a) - rankIdx(b)) || a.name.localeCompare(b.name, 'ru'));
   if (all.length === 0) { host.innerHTML = '<div class="empty">Пока пусто. Вставьте список клана выше — хоть весь ростер разом.</div>'; return; }
   host.innerHTML = `<table>
-    <thead><tr><th>Ник</th><th class="num">Ур.</th><th class="num">Дерево</th><th class="num">Камень</th><th class="num">Железо</th><th class="num">Всего</th><th>Последний обоз</th><th class="num">Могущество</th><th></th></tr></thead>
+    <thead><tr><th>Ник</th><th>Звание</th><th class="num">Ур.</th><th class="num">Дерево</th><th class="num">Камень</th><th class="num">Железо</th><th class="num">Всего</th><th>Последний обоз</th><th class="num">Могущество</th><th></th></tr></thead>
     <tbody>` + all.map(m => {
       const e = byM.get(m.id) || { wood: 0, stone: 0, iron: 0, total: 0, last: null };
       const p = latestPower(m.id);
       const dim = m.archived ? ' style="opacity:.5"' : '';
       return `<tr${dim}>
         <td>${esc(m.name)}${m.archived ? ' <span class="note">(в архиве)</span>' : ''}</td>
+        <td><select class="rank-sel" data-rank="${m.id}">
+          <option value="">—</option>
+          ${RANKS.map(r => `<option value="${r.key}" ${m.rank === r.key ? 'selected' : ''}>${r.label}</option>`).join('')}
+        </select></td>
         <td class="num">${m.level || '—'}</td>
         <td class="num">${e.wood ? fmtFull(e.wood) : '—'}</td>
         <td class="num">${e.stone ? fmtFull(e.stone) : '—'}</td>
@@ -806,6 +839,12 @@ function renderMembers() {
       </tr>`;
     }).join('') + `</tbody></table>`;
 }
+document.getElementById('memberTable').addEventListener('change', (e) => {
+  const sel = e.target.closest('[data-rank]'); if (!sel) return;
+  const m = member(sel.dataset.rank);
+  m.rank = sel.value || undefined;
+  save(); renderMembers();
+});
 document.getElementById('memberTable').addEventListener('click', (e) => {
   const ren = e.target.closest('[data-ren]');
   const arc = e.target.closest('[data-arc]');
