@@ -78,6 +78,14 @@
   .wrap { max-width: 1080px; margin: 0 auto; padding: 20px 16px 64px; }
 
   header.app { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin: 6px 0 18px; }
+  .sync {
+    appearance: none; cursor: pointer; margin-left: auto;
+    font: 600 12.5px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--ink-2); background: var(--chip-wash);
+    border: 1px solid var(--border); border-radius: 999px; padding: 7px 12px;
+  }
+  .sync.ok { color: var(--good); }
+  .sync.bad { color: var(--critical); }
   h1 {
     margin: 0;
     font-family: Georgia, "Times New Roman", serif;
@@ -236,6 +244,7 @@
   <header class="app">
     <h1>Казна клана</h1>
     <div class="tagline">обозы на постройку столицы — Total Battle</div>
+    <button class="sync" id="syncChip" title="Состояние синхронизации с GitHub"></button>
   </header>
 
   <section class="res-grid" id="resCards"></section>
@@ -388,6 +397,31 @@
   <!-- ================= ДАННЫЕ ================= -->
   <section class="panel" id="panel-data">
     <div class="card">
+      <h2>Синхронизация с GitHub</h2>
+      <p class="hint">Все данные хранятся в файле <b>data.json</b> в репозитории <b>2alen/clan-game-utils</b> — это единый источник правды для всех устройств. Репозиторий приватный, поэтому странице нужен ваш токен GitHub. Токен сохраняется только в этом браузере и в репозиторий не попадает.</p>
+      <details style="margin-bottom:12px">
+        <summary class="note" style="cursor:pointer">Как сделать токен (один раз, ~2 минуты)</summary>
+        <ol class="note" style="margin:8px 0 0; padding-left:20px">
+          <li>Откройте <b>github.com/settings/personal-access-tokens</b> → Generate new token.</li>
+          <li>Repository access → <b>Only select repositories</b> → выберите <b>clan-game-utils</b>.</li>
+          <li>Permissions → Repository permissions → <b>Contents → Read and write</b>. Больше ничего.</li>
+          <li>Generate token, скопируйте строку вида <b>github_pat_…</b> и вставьте её сюда.</li>
+        </ol>
+      </details>
+      <div class="frow">
+        <div class="field" style="flex:1; min-width:240px">
+          <label for="ghToken">Токен</label>
+          <input type="password" id="ghToken" placeholder="github_pat_…" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="ghBranch">Ветка</label>
+          <input type="text" id="ghBranch" size="24">
+        </div>
+        <button class="btn" id="ghSave">Сохранить и синхронизировать</button>
+      </div>
+      <p class="note" id="ghNote"></p>
+    </div>
+    <div class="card">
       <h2>Цели по ресурсам</h2>
       <div class="frow" id="goalRow"></div>
     </div>
@@ -406,7 +440,6 @@
     <div class="card">
       <h2>Опасная зона</h2>
       <div class="frow">
-        <button class="btn ghost" id="demoBtn">Загрузить пример данных</button>
         <button class="btn ghost" id="wipeBtn" style="color:var(--critical); border-color:var(--critical)">Стереть всё</button>
       </div>
     </div>
@@ -446,7 +479,8 @@ function rankIdx(m) { const i = RANKS.findIndex(r => r.key === m.rank); return i
 function rankLabel(key) { const r = RANKS.find(x => x.key === key); return r ? r.label : '—'; }
 
 function blank() {
-  return { goal: { wood: 50e6, stone: 50e6, iron: 50e6 }, members: [], deliveries: [], power: [], me: null, msgTop: 8 };
+  return { goal: { wood: 50e6, stone: 50e6, iron: 50e6 }, members: [], deliveries: [], power: [],
+           me: null, msgTop: 8, gone: { members: [], deliveries: [] }, fixups: {} };
 }
 
 /* стартовый ростер клана — используется при первом открытии, пока нет своих данных */
@@ -515,44 +549,184 @@ let state = blank();
 (function init() {
   try {
     const raw = localStorage.getItem(LS_KEY);
-    if (raw) {
-      const s = JSON.parse(raw);
-      state = Object.assign(blank(), s);
-      if (state.members.length || state.deliveries.length || state.power.length) {
-        /* разовые исправления стартового ростера */
-        const typo = state.members.find(m => m.name === 'Orofed');
-        if (typo && !state.members.some(m => m.name === 'Orodfed')) { typo.name = 'Orodfed'; save(); }
-        state.fixups = state.fixups || {};
-        if (!state.fixups.ceretius2 && !state.members.some(m => m.name === 'Ceretius-2')) {
-          /* в клане два игрока с ником Ceretius — второй заведён как Ceretius-2 */
-          const m2 = { id: uid(), name: 'Ceretius-2', archived: false, level: 10 };
-          state.members.push(m2);
-          state.power.push({ id: uid(), mid: m2.id, value: 41988, date: todayStr() });
-          state.fixups.ceretius2 = true; save();
-        }
-        if (!state.fixups.ranks) {
-          /* разовое проставление званий из стартового ростера */
-          for (const line of SEED_ROSTER.split('\n')) {
-            const parts = line.split('|').map(x => x.trim());
-            const m = state.members.find(x => x.name.toLowerCase() === parts[0].toLowerCase());
-            if (m && !m.rank && parts[3]) m.rank = parseRank(parts[3]);
-          }
-          state.fixups.ranks = true; save();
-        }
-        if (!state.me) {
-          const lead = state.members.find(m => m.name === 'Doukree');
-          if (lead) { state.me = lead.id; save(); }
-        }
-        return;
-      }
-    }
+    if (raw) state = Object.assign(blank(), JSON.parse(raw));
   } catch (e) { state = blank(); }
-  importRoster(SEED_ROSTER, todayStr());
-  const lead = state.members.find(m => m.name === 'Doukree');
-  if (lead) state.me = lead.id;
-  save();
+  if (state.members.length === 0) return;
+  /* разовые исправления для старых локальных копий (до появления data.json) */
+  const typo = state.members.find(m => m.name === 'Orofed');
+  if (typo && !state.members.some(m => m.name === 'Orodfed')) typo.name = 'Orodfed';
+  if (!state.fixups.ranks) {
+    for (const line of SEED_ROSTER.split('\n')) {
+      const parts = line.split('|').map(x => x.trim());
+      const m = state.members.find(x => x.name.toLowerCase() === parts[0].toLowerCase());
+      if (m && !m.rank && parts[3]) m.rank = parseRank(parts[3]);
+    }
+    state.fixups.ranks = true;
+  }
+  if (!state.me) {
+    const lead = state.members.find(m => m.name === 'Doukree');
+    if (lead) state.me = lead.id;
+  }
+  localStorage.setItem(LS_KEY, JSON.stringify(state));
 })();
-function save() { localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+
+/* ============ синхронизация: data.json в GitHub — единый источник правды ============ */
+const GH = { owner: '2alen', repo: 'clan-game-utils', path: 'data.json', defBranch: 'claude/clan-resource-tracker-nnt9fi' };
+const META_KEY = 'clan-treasury-sync';
+let meta = { token: '', branch: GH.defBranch, dirty: false, lastSync: 0 };
+try { Object.assign(meta, JSON.parse(localStorage.getItem(META_KEY) || '{}')); } catch (e) {}
+function saveMeta() { localStorage.setItem(META_KEY, JSON.stringify(meta)); }
+
+let remoteSha = null;
+let syncTimer = null;
+let syncState = meta.token ? 'pending' : 'no-token';
+let syncErrText = '';
+
+function b64encUtf8(s) {
+  const bytes = new TextEncoder().encode(s);
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+function b64decUtf8(b) {
+  const bin = atob(String(b).replace(/\s/g, ''));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new TextDecoder().decode(bytes);
+}
+function ghHeaders() {
+  const h = { 'Accept': 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' };
+  if (meta.token) h['Authorization'] = 'Bearer ' + meta.token;
+  return h;
+}
+async function ghPull() {
+  const url = `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${GH.path}?ref=${encodeURIComponent(meta.branch)}`;
+  const res = await fetch(url, { headers: ghHeaders(), cache: 'no-store' });
+  if (res.status === 404) { remoteSha = null; return null; }
+  if (!res.ok) { const e = new Error('http'); e.status = res.status; throw e; }
+  const j = await res.json();
+  remoteSha = j.sha;
+  return Object.assign(blank(), JSON.parse(b64decUtf8(j.content)));
+}
+async function ghPush() {
+  const body = {
+    message: 'Обновление данных казны',
+    content: b64encUtf8(JSON.stringify(state, null, 1)),
+    branch: meta.branch,
+  };
+  if (remoteSha) body.sha = remoteSha;
+  const res = await fetch(`https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${GH.path}`, {
+    method: 'PUT', headers: ghHeaders(), body: JSON.stringify(body),
+  });
+  if (!res.ok) { const e = new Error('http'); e.status = res.status; throw e; }
+  const j = await res.json();
+  remoteSha = j.content.sha;
+}
+
+/* слияние: git — база, локальные изменения накатываются сверху; удалённое не воскресает */
+function mergeStates(remote, local, preferLocal) {
+  if (!remote) return local;
+  const out = blank();
+  const gr = remote.gone || blank().gone, gl = local.gone || blank().gone;
+  out.gone = {
+    members: [...new Set([...(gr.members || []), ...(gl.members || [])])],
+    deliveries: [...new Set([...(gr.deliveries || []), ...(gl.deliveries || [])])],
+  };
+  const goneM = new Set(out.gone.members), goneD = new Set(out.gone.deliveries);
+
+  const byName = new Map();
+  for (const m of remote.members) byName.set(m.name.toLowerCase(), { ...m });
+  const idMap = new Map();
+  for (const m of local.members) {
+    const key = m.name.toLowerCase();
+    const ex = byName.get(key);
+    if (ex) {
+      idMap.set(m.id, ex.id);
+      if (preferLocal) {
+        if (m.level) ex.level = m.level;
+        if (m.rank) ex.rank = m.rank;
+        ex.archived = !!m.archived;
+      } else {
+        if (m.level && !ex.level) ex.level = m.level;
+        if (m.rank && !ex.rank) ex.rank = m.rank;
+      }
+    } else {
+      byName.set(key, { ...m });
+    }
+  }
+  out.members = [...byName.values()].filter(m => !goneM.has(m.id));
+  const remap = id => idMap.get(id) || id;
+
+  const dmap = new Map();
+  for (const d of remote.deliveries) dmap.set(d.id, d);
+  for (const d of local.deliveries) dmap.set(d.id, { ...d, mid: remap(d.mid) });
+  out.deliveries = [...dmap.values()].filter(d => !goneD.has(d.id) && !goneM.has(d.mid));
+
+  const pmap = new Map();
+  for (const p of remote.power) pmap.set(p.mid + '|' + p.date, p);
+  for (const p of local.power) {
+    const mid = remap(p.mid);
+    const k = mid + '|' + p.date;
+    if (preferLocal || !pmap.has(k)) pmap.set(k, { ...p, mid });
+  }
+  out.power = [...pmap.values()].filter(p => !goneM.has(p.mid));
+
+  const src = preferLocal ? local : remote;
+  out.goal = Object.assign({}, remote.goal, preferLocal ? local.goal : remote.goal);
+  out.me = remap(src.me || local.me || remote.me);
+  out.msgTop = src.msgTop || 8;
+  out.fixups = Object.assign({}, remote.fixups, local.fixups);
+  return out;
+}
+
+async function syncNow() {
+  if (!meta.token) { syncState = 'no-token'; renderSyncChip(); return; }
+  syncState = 'syncing'; renderSyncChip();
+  try {
+    const remote = await ghPull();
+    const merged = mergeStates(remote, state, meta.dirty);
+    state = merged;
+    localStorage.setItem(LS_KEY, JSON.stringify(state));
+    const needPush = meta.dirty || !remote ||
+      remote.deliveries.length !== merged.deliveries.length ||
+      remote.members.length !== merged.members.length ||
+      remote.power.length !== merged.power.length;
+    if (needPush) await ghPush();
+    meta.dirty = false; meta.lastSync = Date.now(); saveMeta();
+    syncState = 'ok';
+    renderAll();
+  } catch (err) {
+    if (err && err.status === 401) { syncState = 'error'; syncErrText = 'токен не принят GitHub'; }
+    else if (err && err.status === 403) { syncState = 'error'; syncErrText = 'нет доступа — проверьте права токена (Contents: Read and write)'; }
+    else if (err && err.status === 409) { syncState = 'pending'; scheduleSync(); }
+    else if (err && err.status) { syncState = 'error'; syncErrText = 'GitHub ответил ' + err.status; }
+    else { syncState = 'offline'; }
+    renderSyncChip();
+  }
+}
+function scheduleSync() {
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(syncNow, 1500);
+}
+function renderSyncChip() {
+  const el = document.getElementById('syncChip');
+  el.className = 'sync';
+  if (syncState === 'ok' && !meta.dirty) {
+    el.classList.add('ok');
+    el.textContent = '✓ синхронизировано ' + new Date(meta.lastSync).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+  } else if (syncState === 'syncing') el.textContent = '↻ синхронизация…';
+  else if (syncState === 'no-token') { el.classList.add('bad'); el.textContent = '⚠ нет токена — данные только в этом браузере'; }
+  else if (syncState === 'offline') { el.classList.add('bad'); el.textContent = '✗ нет связи с GitHub с этой страницы'; }
+  else if (syncState === 'error') { el.classList.add('bad'); el.textContent = '✗ ' + syncErrText; }
+  else el.textContent = '● есть несинхронизированные изменения';
+}
+document.getElementById('syncChip').addEventListener('click', () => {
+  document.querySelector('#tabs button[data-tab="data"]').click();
+});
+function save() {
+  localStorage.setItem(LS_KEY, JSON.stringify(state));
+  if (typeof meta !== 'undefined') { meta.dirty = true; saveMeta(); renderSyncChip(); scheduleSync(); }
+}
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
 /* ============ утилиты ============ */
@@ -811,6 +985,7 @@ document.getElementById('logTable').addEventListener('click', (e) => {
   const d = state.deliveries.find(x => x.id === b.dataset.del);
   if (d && confirm(`Удалить обоз: ${memberName(d.mid)}, ${resMeta(d.res).name.toLowerCase()} ${fmtFull(d.amount)}?`)) {
     state.deliveries = state.deliveries.filter(x => x.id !== d.id);
+    state.gone.deliveries.push(d.id);
     save(); renderAll();
   }
 });
@@ -835,7 +1010,7 @@ function renderMembers() {
   const byM = totalsByMember();
   const all = [...state.members].sort((a, b) =>
     (a.archived - b.archived) || (rankIdx(a) - rankIdx(b)) || a.name.localeCompare(b.name, 'ru'));
-  if (all.length === 0) { host.innerHTML = '<div class="empty">Пока пусто. Вставьте список клана выше — хоть весь ростер разом.</div>'; return; }
+  if (all.length === 0) { host.innerHTML = '<div class="empty">Пока пусто. Данные клана живут в GitHub — вставьте токен во вкладке «Данные», и всё подтянется. Либо вставьте список выше.</div>'; return; }
   host.innerHTML = `<table>
     <thead><tr><th>Ник</th><th>Звание</th><th class="num">Ур.</th><th class="num">Дерево</th><th class="num">Камень</th><th class="num">Железо</th><th class="num">Всего</th><th>Последний обоз</th><th class="num">Могущество</th><th></th></tr></thead>
     <tbody>` + all.map(m => {
@@ -888,8 +1063,10 @@ document.getElementById('memberTable').addEventListener('click', (e) => {
       : `Удалить «${m.name}»?`;
     if (confirm(msg)) {
       state.members = state.members.filter(x => x.id !== m.id);
+      state.deliveries.filter(d => d.mid === m.id).forEach(d => state.gone.deliveries.push(d.id));
       state.deliveries = state.deliveries.filter(d => d.mid !== m.id);
       state.power = state.power.filter(p => p.mid !== m.id);
+      state.gone.members.push(m.id);
       powerSel.delete(m.id);
       save(); renderAll();
     }
@@ -1244,39 +1421,16 @@ document.getElementById('importBtn').addEventListener('click', () => {
   document.getElementById('ioNote').textContent = 'Импортировано.';
 });
 
-document.getElementById('wipeBtn').addEventListener('click', () => {
-  if (!confirm('Стереть ВСЕ данные (участников, обозы, замеры)? Отменить будет нельзя.')) return;
+document.getElementById('wipeBtn').addEventListener('click', async () => {
+  if (!confirm('Стереть ВСЕ данные (участников, обозы, замеры) — и в этом браузере, и в data.json в GitHub? Отменить будет нельзя.')) return;
   if (!confirm('Точно-точно? Если сомневаетесь, сначала сделайте выгрузку.')) return;
   state = blank(); powerSel.clear(); slotByMid.clear();
-  save(); renderAll();
-});
-
-document.getElementById('demoBtn').addEventListener('click', () => {
-  if (state.members.length > 0 && !confirm('Пример добавится к текущим данным. Продолжить?')) return;
-  const names = ['Воевода', 'Медведь', 'Тихий_Дон', 'Ярослава', 'Кузнец77'];
-  const mids = names.map(n => {
-    const ex = state.members.find(m => m.name === n);
-    if (ex) return ex.id;
-    const m = { id: uid(), name: n, archived: false };
-    state.members.push(m); return m.id;
-  });
-  const day = ms => { const d = new Date(Date.now() - ms * 86400000);
-    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
-  const resKeys = ['wood', 'stone', 'iron'];
-  for (let i = 0; i < 26; i++) {
-    state.deliveries.push({
-      id: uid(), mid: mids[i % 4], res: resKeys[i % 3],
-      amount: [500e3, 1.2e6, 800e3, 2e6, 350e3][i % 5],
-      date: day(13 - (i % 14)), note: '',
-    });
+  localStorage.setItem(LS_KEY, JSON.stringify(state));
+  if (meta.token) {
+    try { await ghPull(); await ghPush(); meta.dirty = false; meta.lastSync = Date.now(); saveMeta(); syncState = 'ok'; }
+    catch (e) { syncState = 'error'; syncErrText = 'в GitHub стереть не вышло'; }
   }
-  mids.forEach((mid, mi) => {
-    [21, 14, 7, 0].forEach((back, step) => {
-      const base = (20 + mi * 9) * 1e6;
-      state.power.push({ id: uid(), mid, value: Math.round(base * (1 + step * (0.04 + mi * 0.012))), date: day(back) });
-    });
-  });
-  save(); renderAll();
+  renderAll(); renderSyncChip();
 });
 
 /* ============ общий рендер ============ */
@@ -1294,9 +1448,28 @@ function renderAll() {
   renderGoals();
 }
 
+document.getElementById('ghToken').value = meta.token;
+document.getElementById('ghBranch').value = meta.branch;
+document.getElementById('ghSave').addEventListener('click', () => {
+  meta.token = document.getElementById('ghToken').value.trim();
+  meta.branch = document.getElementById('ghBranch').value.trim() || GH.defBranch;
+  saveMeta();
+  const note = document.getElementById('ghNote');
+  if (!meta.token) { note.textContent = 'Токен пуст — данные останутся только в этом браузере.'; syncState = 'no-token'; renderSyncChip(); return; }
+  note.textContent = 'Проверяю доступ и синхронизирую…';
+  syncNow().then(() => {
+    note.textContent = syncState === 'ok'
+      ? 'Готово: данные слиты с data.json в репозитории. Дальше всё синхронизируется само.'
+      : 'Не получилось: смотрите статус в шапке страницы.';
+  });
+});
+
 document.getElementById('dDate').value = todayStr();
 document.getElementById('pDate').value = todayStr();
 renderAll();
+renderSyncChip();
+if (meta.token) syncNow();
+window.addEventListener('focus', () => { if (meta.token) scheduleSync(); });
 window.addEventListener('resize', () => renderPowerChart());
 </script>
 </body>

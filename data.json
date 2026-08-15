@@ -1,0 +1,802 @@
+{
+ "goal": {
+  "wood": 50000000,
+  "stone": 50000000,
+  "iron": 50000000
+ },
+ "members": [
+  {
+   "id": "m-doukree",
+   "name": "Doukree",
+   "archived": false,
+   "level": 37,
+   "rank": "leader"
+  },
+  {
+   "id": "m-dukhn",
+   "name": "Dukhn",
+   "archived": false,
+   "level": 16,
+   "rank": "superior"
+  },
+  {
+   "id": "m-fordrellador",
+   "name": "Fordrellador",
+   "archived": false,
+   "level": 14,
+   "rank": "superior"
+  },
+  {
+   "id": "m-aybrineyl",
+   "name": "Aybrineyl",
+   "archived": false,
+   "level": 29,
+   "rank": "officer"
+  },
+  {
+   "id": "m-kelegon",
+   "name": "Kelegon",
+   "archived": false,
+   "level": 20,
+   "rank": "officer"
+  },
+  {
+   "id": "m-mazuzahn",
+   "name": "Mazuzahn",
+   "archived": false,
+   "level": 14,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-dutynhonor",
+   "name": "DutyNhonor",
+   "archived": false,
+   "level": 15,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-nerdailas",
+   "name": "Nerdailas",
+   "archived": false,
+   "level": 18,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-thordirn",
+   "name": "Thordirn",
+   "archived": false,
+   "level": 15,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-bein",
+   "name": "Bein",
+   "archived": false,
+   "level": 11,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-blondiespeedracr",
+   "name": "Blondiespeedracr",
+   "archived": false,
+   "level": 14,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-artsakh",
+   "name": "Artsakh",
+   "archived": false,
+   "level": 13,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-dagore",
+   "name": "Dagore",
+   "archived": false,
+   "level": 12,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-lirosin",
+   "name": "Lirosin",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-lorbrinir",
+   "name": "Lorbrinir",
+   "archived": false,
+   "level": 14,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-eyloten",
+   "name": "Eyloten",
+   "archived": false,
+   "level": 12,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-eydanen",
+   "name": "Eydanen",
+   "archived": false,
+   "level": 12,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-ceretius",
+   "name": "Ceretius",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-ceretius-2",
+   "name": "Ceretius-2",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-envening",
+   "name": "Envening",
+   "archived": false,
+   "level": 12,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-orodfed",
+   "name": "Orodfed",
+   "archived": false,
+   "level": 11,
+   "rank": "officer"
+  },
+  {
+   "id": "m-tuzshura",
+   "name": "Tuzshura",
+   "archived": false,
+   "level": 11,
+   "rank": "officer"
+  },
+  {
+   "id": "m-digol",
+   "name": "Digol",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-tomuro",
+   "name": "Tomuro",
+   "archived": false,
+   "level": 12,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-brainmin",
+   "name": "Brainmin",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-sirarad",
+   "name": "Sirarad",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-darineyl",
+   "name": "Darineyl",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-legon",
+   "name": "Legon",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-aydael",
+   "name": "Aydael",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-mazalago",
+   "name": "Mazalago",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-ariron",
+   "name": "Ariron",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-lorbriman",
+   "name": "Lorbriman",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-earninef",
+   "name": "Earninef",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-halubrad",
+   "name": "Halubrad",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-tautaur",
+   "name": "Tautaur",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-celune",
+   "name": "Celune",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-lefinin",
+   "name": "Lefinin",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-taugal",
+   "name": "Taugal",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-finros",
+   "name": "Finros",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-argoleyl",
+   "name": "Argoleyl",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-amaror",
+   "name": "Amaror",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-saldaning",
+   "name": "Saldaning",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-adorazius",
+   "name": "Adorazius",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-floyergus",
+   "name": "Floyergus",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-tygradi",
+   "name": "Tygradi",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-galafirilas",
+   "name": "Galafirilas",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-dacage",
+   "name": "Dacage",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-manabandis",
+   "name": "Manabandis",
+   "archived": false,
+   "level": 9,
+   "rank": "veteran"
+  },
+  {
+   "id": "m-babelle",
+   "name": "Babelle",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-nerneilas",
+   "name": "Nerneilas",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-gushicage",
+   "name": "Gushicage",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-lirafin",
+   "name": "Lirafin",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-megin",
+   "name": "Megin",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-tagore",
+   "name": "Tagore",
+   "archived": false,
+   "level": 8,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-funfiren",
+   "name": "Funfiren",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-maedrosor",
+   "name": "Maedrosor",
+   "archived": false,
+   "level": 8,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-tefur",
+   "name": "Tefur",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-niran",
+   "name": "Niran",
+   "archived": false,
+   "level": 8,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-deli",
+   "name": "Deli",
+   "archived": false,
+   "level": 7,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-rainterror",
+   "name": "Rainterror",
+   "archived": false,
+   "level": 6,
+   "rank": "soldier"
+  }
+ ],
+ "deliveries": [],
+ "power": [
+  {
+   "id": "p-doukree-2026-08-14",
+   "mid": "m-doukree",
+   "value": 534623,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-dukhn-2026-08-14",
+   "mid": "m-dukhn",
+   "value": 216719,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-fordrellador-2026-08-14",
+   "mid": "m-fordrellador",
+   "value": 168082,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-aybrineyl-2026-08-14",
+   "mid": "m-aybrineyl",
+   "value": 636272,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-kelegon-2026-08-14",
+   "mid": "m-kelegon",
+   "value": 243566,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-mazuzahn-2026-08-14",
+   "mid": "m-mazuzahn",
+   "value": 347590,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-dutynhonor-2026-08-14",
+   "mid": "m-dutynhonor",
+   "value": 295505,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-nerdailas-2026-08-14",
+   "mid": "m-nerdailas",
+   "value": 235318,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-thordirn-2026-08-14",
+   "mid": "m-thordirn",
+   "value": 213447,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-bein-2026-08-14",
+   "mid": "m-bein",
+   "value": 203163,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-blondiespeedracr-2026-08-14",
+   "mid": "m-blondiespeedracr",
+   "value": 111423,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-artsakh-2026-08-14",
+   "mid": "m-artsakh",
+   "value": 111332,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-dagore-2026-08-14",
+   "mid": "m-dagore",
+   "value": 108057,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-lirosin-2026-08-14",
+   "mid": "m-lirosin",
+   "value": 97323,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-lorbrinir-2026-08-14",
+   "mid": "m-lorbrinir",
+   "value": 95460,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-eyloten-2026-08-14",
+   "mid": "m-eyloten",
+   "value": 87941,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-eydanen-2026-08-14",
+   "mid": "m-eydanen",
+   "value": 87211,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-ceretius-2026-08-14",
+   "mid": "m-ceretius",
+   "value": 86999,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-ceretius-2-2026-08-14",
+   "mid": "m-ceretius-2",
+   "value": 41988,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-envening-2026-08-14",
+   "mid": "m-envening",
+   "value": 81495,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-orodfed-2026-08-14",
+   "mid": "m-orodfed",
+   "value": 78745,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-tuzshura-2026-08-14",
+   "mid": "m-tuzshura",
+   "value": 78157,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-digol-2026-08-14",
+   "mid": "m-digol",
+   "value": 72319,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-tomuro-2026-08-14",
+   "mid": "m-tomuro",
+   "value": 70327,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-brainmin-2026-08-14",
+   "mid": "m-brainmin",
+   "value": 65739,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-sirarad-2026-08-14",
+   "mid": "m-sirarad",
+   "value": 65077,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-darineyl-2026-08-14",
+   "mid": "m-darineyl",
+   "value": 61733,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-legon-2026-08-14",
+   "mid": "m-legon",
+   "value": 60240,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-aydael-2026-08-14",
+   "mid": "m-aydael",
+   "value": 58555,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-mazalago-2026-08-14",
+   "mid": "m-mazalago",
+   "value": 57402,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-ariron-2026-08-14",
+   "mid": "m-ariron",
+   "value": 54887,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-lorbriman-2026-08-14",
+   "mid": "m-lorbriman",
+   "value": 54865,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-earninef-2026-08-14",
+   "mid": "m-earninef",
+   "value": 54225,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-halubrad-2026-08-14",
+   "mid": "m-halubrad",
+   "value": 52682,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-tautaur-2026-08-14",
+   "mid": "m-tautaur",
+   "value": 50491,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-celune-2026-08-14",
+   "mid": "m-celune",
+   "value": 48580,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-lefinin-2026-08-14",
+   "mid": "m-lefinin",
+   "value": 48207,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-taugal-2026-08-14",
+   "mid": "m-taugal",
+   "value": 48206,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-finros-2026-08-14",
+   "mid": "m-finros",
+   "value": 47570,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-argoleyl-2026-08-14",
+   "mid": "m-argoleyl",
+   "value": 45273,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-amaror-2026-08-14",
+   "mid": "m-amaror",
+   "value": 40148,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-saldaning-2026-08-14",
+   "mid": "m-saldaning",
+   "value": 39851,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-adorazius-2026-08-14",
+   "mid": "m-adorazius",
+   "value": 37309,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-floyergus-2026-08-14",
+   "mid": "m-floyergus",
+   "value": 36975,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-tygradi-2026-08-14",
+   "mid": "m-tygradi",
+   "value": 36127,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-galafirilas-2026-08-14",
+   "mid": "m-galafirilas",
+   "value": 34922,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-dacage-2026-08-14",
+   "mid": "m-dacage",
+   "value": 34646,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-manabandis-2026-08-14",
+   "mid": "m-manabandis",
+   "value": 32668,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-babelle-2026-08-14",
+   "mid": "m-babelle",
+   "value": 27750,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-nerneilas-2026-08-14",
+   "mid": "m-nerneilas",
+   "value": 27122,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-gushicage-2026-08-14",
+   "mid": "m-gushicage",
+   "value": 25709,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-lirafin-2026-08-14",
+   "mid": "m-lirafin",
+   "value": 24563,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-megin-2026-08-14",
+   "mid": "m-megin",
+   "value": 22305,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-tagore-2026-08-14",
+   "mid": "m-tagore",
+   "value": 18435,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-funfiren-2026-08-14",
+   "mid": "m-funfiren",
+   "value": 18354,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-maedrosor-2026-08-14",
+   "mid": "m-maedrosor",
+   "value": 18273,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-tefur-2026-08-14",
+   "mid": "m-tefur",
+   "value": 18241,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-niran-2026-08-14",
+   "mid": "m-niran",
+   "value": 16371,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-deli-2026-08-14",
+   "mid": "m-deli",
+   "value": 14412,
+   "date": "2026-08-14"
+  },
+  {
+   "id": "p-rainterror-2026-08-14",
+   "mid": "m-rainterror",
+   "value": 11117,
+   "date": "2026-08-14"
+  }
+ ],
+ "me": "m-doukree",
+ "msgTop": 8,
+ "gone": {
+  "members": [],
+  "deliveries": []
+ },
+ "fixups": {
+  "ranks": true,
+  "ceretius2": true
+ }
+}
