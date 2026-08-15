@@ -292,6 +292,24 @@
     </div>
 
     <div class="card">
+      <h2>Сообщение для клана</h2>
+      <p class="hint">Готовый текст для чата: прогресс сбора и благодарность тем, кто присылает. Личные цифры участников не раскрываются. Текст можно поправить перед отправкой.</p>
+      <div class="frow" style="margin-bottom:10px">
+        <div class="field">
+          <label for="msgMe">Не упоминать (это я)</label>
+          <select id="msgMe"></select>
+        </div>
+        <div class="field">
+          <label for="msgTop">Имён в топе</label>
+          <input type="number" id="msgTop" min="1" max="20" size="4">
+        </div>
+        <button class="btn ghost" id="msgCopy">Скопировать</button>
+      </div>
+      <textarea id="msgText" rows="12"></textarea>
+      <p class="note" id="msgNote"></p>
+    </div>
+
+    <div class="card">
       <h2>Журнал обозов</h2>
       <div class="frow" style="margin-bottom:10px">
         <div class="field">
@@ -428,7 +446,7 @@ function rankIdx(m) { const i = RANKS.findIndex(r => r.key === m.rank); return i
 function rankLabel(key) { const r = RANKS.find(x => x.key === key); return r ? r.label : '—'; }
 
 function blank() {
-  return { goal: { wood: 50e6, stone: 50e6, iron: 50e6 }, members: [], deliveries: [], power: [] };
+  return { goal: { wood: 50e6, stone: 50e6, iron: 50e6 }, members: [], deliveries: [], power: [], me: null, msgTop: 8 };
 }
 
 /* стартовый ростер клана — используется при первом открытии, пока нет своих данных */
@@ -521,11 +539,17 @@ let state = blank();
           }
           state.fixups.ranks = true; save();
         }
+        if (!state.me) {
+          const lead = state.members.find(m => m.name === 'Doukree');
+          if (lead) { state.me = lead.id; save(); }
+        }
         return;
       }
     }
   } catch (e) { state = blank(); }
   importRoster(SEED_ROSTER, todayStr());
+  const lead = state.members.find(m => m.name === 'Doukree');
+  if (lead) state.me = lead.id;
   save();
 })();
 function save() { localStorage.setItem(LS_KEY, JSON.stringify(state)); }
@@ -553,6 +577,12 @@ function parseAmount(str) {
   else if (suf === 'кк' || suf === 'м' || suf === 'm' || suf === 'млн') v *= 1e6;
   else if (suf === 'б' || suf === 'b' || suf === 'млрд') v *= 1e9;
   return Math.round(v);
+}
+function plural(n, one, few, many) {
+  const n10 = n % 10, n100 = n % 100;
+  if (n10 === 1 && n100 !== 11) return one;
+  if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return few;
+  return many;
 }
 function parseRosterNum(x) {
   const c = String(x).replace(/\s/g, '');
@@ -1081,6 +1111,71 @@ document.getElementById('leaders').addEventListener('mouseleave', () => {
   document.getElementById('tip').style.display = 'none';
 });
 
+/* ============ сообщение для клана ============ */
+const RES_ICON = { wood: '🌳', stone: '🪨', iron: '⛏️' };
+
+function buildClanMessage() {
+  const t = totals();
+  const byM = totalsByMember();
+  const meId = state.me;
+  let gotSum = 0, goalSum = 0;
+  const resLines = RES.map(r => {
+    const got = t[r.key], goal = state.goal[r.key] || 50e6;
+    gotSum += Math.min(got, goal); goalSum += goal;
+    const pct = Math.round(got / goal * 100);
+    return `${RES_ICON[r.key]} ${r.name} — ${pct}% (${fmtShort(got)} из ${fmtShort(goal)})`;
+  });
+
+  if (gotSum === 0) {
+    return ['⚔️ Начинаем сбор на столицу!', '',
+      'Цель — по ' + fmtShort(state.goal.wood) + ' дерева, камня и железа.', '',
+      'Присылайте обозы, каждый вагон идёт в общий счёт. Учёт веду лично, никто не потеряется 💪'].join('\n');
+  }
+
+  const top = [...byM.entries()]
+    .filter(([mid, e]) => e.total > 0 && mid !== meId && member(mid))
+    .sort((a, b) => b[1].total - a[1].total)
+    .slice(0, Math.max(1, state.msgTop || 8))
+    .map(([mid]) => memberName(mid));
+
+  const silent = activeMembers().filter(m => m.id !== meId && !(byM.get(m.id) && byM.get(m.id).total > 0)).length;
+
+  const out = ['⚔️ Сбор на столицу — как идут дела', ''].concat(resLines);
+  out.push('', 'Общий прогресс: ' + Math.round(gotSum / goalSum * 100) + '%.');
+  if (top.length) {
+    out.push('', 'Спасибо за обозы: ' + top.join(', ') + ' — вы тащите!');
+  }
+  if (silent > 0) {
+    out.push('', 'Ещё ' + silent + ' ' + plural(silent, 'участник', 'участника', 'участников') +
+      ' пока ' + plural(silent, 'не присылал', 'не присылали', 'не присылали') +
+      ' — любой обоз в помощь, столица строится всем кланом 💪');
+  }
+  return out.join('\n');
+}
+
+function renderClanMessage() {
+  const sel = document.getElementById('msgMe');
+  sel.innerHTML = '<option value="">— никого —</option>' +
+    activeMembers().map(m => `<option value="${m.id}" ${state.me === m.id ? 'selected' : ''}>${esc(m.name)}</option>`).join('');
+  document.getElementById('msgTop').value = state.msgTop || 8;
+  document.getElementById('msgText').value = buildClanMessage();
+}
+document.getElementById('msgMe').addEventListener('change', (e) => {
+  state.me = e.target.value || null; save(); renderClanMessage();
+});
+document.getElementById('msgTop').addEventListener('change', (e) => {
+  const n = parseInt(e.target.value, 10);
+  state.msgTop = (n > 0 && n <= 20) ? n : 8;
+  save(); renderClanMessage();
+});
+document.getElementById('msgCopy').addEventListener('click', async () => {
+  const ta = document.getElementById('msgText');
+  const note = document.getElementById('msgNote');
+  ta.select();
+  try { await navigator.clipboard.writeText(ta.value); note.textContent = 'Скопировано — вставляйте в клановый чат.'; }
+  catch (err) { note.textContent = 'Не вышло скопировать автоматически — текст выделен, скопируйте вручную.'; }
+});
+
 /* ============ данные: цели, экспорт/импорт ============ */
 function renderGoals() {
   const host = document.getElementById('goalRow');
@@ -1193,6 +1288,7 @@ function renderAll() {
   renderLog();
   renderMembers();
   renderPower();
+  renderClanMessage();
   renderGoals();
 }
 
