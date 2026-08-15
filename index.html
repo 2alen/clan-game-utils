@@ -293,7 +293,7 @@
 
     <div class="card">
       <h2>Сообщение для клана</h2>
-      <p class="hint">Готовый текст для чата: прогресс сбора и благодарность тем, кто присылает. Личные цифры участников не раскрываются. Текст можно поправить перед отправкой.</p>
+      <p class="hint">Готовый текст для игрового чата — на английском, без эмодзи: прогресс сбора и благодарность тем, кто присылает. Личные цифры участников не раскрываются. Текст можно поправить перед отправкой.</p>
       <div class="frow" style="margin-bottom:10px">
         <div class="field">
           <label for="msgMe">Не упоминать (это я)</label>
@@ -577,12 +577,6 @@ function parseAmount(str) {
   else if (suf === 'кк' || suf === 'м' || suf === 'm' || suf === 'млн') v *= 1e6;
   else if (suf === 'б' || suf === 'b' || suf === 'млрд') v *= 1e9;
   return Math.round(v);
-}
-function plural(n, one, few, many) {
-  const n10 = n % 10, n100 = n % 100;
-  if (n10 === 1 && n100 !== 11) return one;
-  if (n10 >= 2 && n10 <= 4 && (n100 < 12 || n100 > 14)) return few;
-  return many;
 }
 function parseRosterNum(x) {
   const c = String(x).replace(/\s/g, '');
@@ -1111,8 +1105,16 @@ document.getElementById('leaders').addEventListener('mouseleave', () => {
   document.getElementById('tip').style.display = 'none';
 });
 
-/* ============ сообщение для клана ============ */
-const RES_ICON = { wood: '🌳', stone: '🪨', iron: '⛏️' };
+/* ============ сообщение для клана (текст — на английском, для игрового чата) ============ */
+const RES_EN = { wood: 'Wood', stone: 'Stone', iron: 'Iron' };
+function fmtShortEn(n) {
+  const a = Math.abs(n);
+  const f = v => String(Math.round(v * 10) / 10);
+  if (a >= 1e9) return f(n / 1e9) + 'B';
+  if (a >= 1e6) return f(n / 1e6) + 'M';
+  if (a >= 1e3) return f(n / 1e3) + 'K';
+  return String(Math.round(n));
+}
 
 function buildClanMessage() {
   const t = totals();
@@ -1123,13 +1125,14 @@ function buildClanMessage() {
     const got = t[r.key], goal = state.goal[r.key] || 50e6;
     gotSum += Math.min(got, goal); goalSum += goal;
     const pct = Math.round(got / goal * 100);
-    return `${RES_ICON[r.key]} ${r.name} — ${pct}% (${fmtShort(got)} из ${fmtShort(goal)})`;
+    return `${RES_EN[r.key]} - ${pct}% (${fmtShortEn(got)} of ${fmtShortEn(goal)})`;
   });
 
   if (gotSum === 0) {
-    return ['⚔️ Начинаем сбор на столицу!', '',
-      'Цель — по ' + fmtShort(state.goal.wood) + ' дерева, камня и железа.', '',
-      'Присылайте обозы, каждый вагон идёт в общий счёт. Учёт веду лично, никто не потеряется 💪'].join('\n');
+    return ['Capital build - resource drive', '',
+      'Goal: ' + fmtShortEn(state.goal.wood) + ' wood, ' + fmtShortEn(state.goal.stone) +
+        ' stone and ' + fmtShortEn(state.goal.iron) + ' iron.', '',
+      'Send your caravans whenever you can - every load counts. I am tracking all of them, nothing gets lost.'].join('\n');
   }
 
   const top = [...byM.entries()]
@@ -1140,15 +1143,14 @@ function buildClanMessage() {
 
   const silent = activeMembers().filter(m => m.id !== meId && !(byM.get(m.id) && byM.get(m.id).total > 0)).length;
 
-  const out = ['⚔️ Сбор на столицу — как идут дела', ''].concat(resLines);
-  out.push('', 'Общий прогресс: ' + Math.round(gotSum / goalSum * 100) + '%.');
+  const out = ['Capital build - where we stand', ''].concat(resLines);
+  out.push('', 'Overall progress: ' + Math.round(gotSum / goalSum * 100) + '%.');
   if (top.length) {
-    out.push('', 'Спасибо за обозы: ' + top.join(', ') + ' — вы тащите!');
+    out.push('', 'Big thanks for the caravans: ' + top.join(', ') + '. You are carrying this build.');
   }
   if (silent > 0) {
-    out.push('', 'Ещё ' + silent + ' ' + plural(silent, 'участник', 'участника', 'участников') +
-      ' пока ' + plural(silent, 'не присылал', 'не присылали', 'не присылали') +
-      ' — любой обоз в помощь, столица строится всем кланом 💪');
+    out.push('', silent + (silent === 1 ? ' member has' : ' members have') +
+      ' not sent anything yet - any caravan helps, we build the capital together.');
   }
   return out.join('\n');
 }
