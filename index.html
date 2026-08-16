@@ -680,13 +680,18 @@ function mergeStates(remote, local, preferLocal) {
 }
 
 async function syncNow() {
-  if (!meta.token) { syncState = 'no-token'; renderSyncChip(); return; }
   syncState = 'syncing'; renderSyncChip();
   try {
     const remote = await ghPull();
     const merged = mergeStates(remote, state, meta.dirty);
     state = merged;
     localStorage.setItem(LS_KEY, JSON.stringify(state));
+    if (!meta.token) {
+      /* публичный репозиторий читается и без токена; токен нужен только для записи */
+      syncState = 'no-token';
+      renderAll(); renderSyncChip();
+      return;
+    }
     const needPush = meta.dirty || !remote ||
       remote.deliveries.length !== merged.deliveries.length ||
       remote.members.length !== merged.members.length ||
@@ -715,7 +720,7 @@ function renderSyncChip() {
     el.classList.add('ok');
     el.textContent = '✓ синхронизировано ' + new Date(meta.lastSync).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
   } else if (syncState === 'syncing') el.textContent = '↻ синхронизация…';
-  else if (syncState === 'no-token') { el.classList.add('bad'); el.textContent = '⚠ нет токена — данные только в этом браузере'; }
+  else if (syncState === 'no-token') { el.classList.add('bad'); el.textContent = meta.dirty ? '⚠ нет токена — ваши записи НЕ сохраняются в GitHub' : '⚠ только просмотр — для записи вставьте токен в «Данных»'; }
   else if (syncState === 'offline') { el.classList.add('bad'); el.textContent = '✗ нет связи с GitHub с этой страницы'; }
   else if (syncState === 'error') { el.classList.add('bad'); el.textContent = '✗ ' + syncErrText; }
   else el.textContent = '● есть несинхронизированные изменения';
@@ -1468,8 +1473,8 @@ document.getElementById('dDate').value = todayStr();
 document.getElementById('pDate').value = todayStr();
 renderAll();
 renderSyncChip();
-if (meta.token) syncNow();
-window.addEventListener('focus', () => { if (meta.token) scheduleSync(); });
+syncNow();
+window.addEventListener('focus', () => scheduleSync());
 window.addEventListener('resize', () => renderPowerChart());
 </script>
 </body>
