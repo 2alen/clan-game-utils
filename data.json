@@ -5,187 +5,1239 @@
   "iron": 50000000
  },
  "members": [
-  {"id":"msuci22hjbxrg","name":"Doukree","archived":false,"level":37,"rank":"leader"},
-  {"id":"msuci22hfuq5a","name":"Dukhn","archived":false,"level":16,"rank":"superior"},
-  {"id":"msuci22hh9taw","name":"Fordrellador","archived":false,"level":14,"rank":"superior"},
-  {"id":"msuci22hwtvj5","name":"Aybrineyl","archived":false,"level":29,"rank":"officer"},
-  {"id":"msuci22hiqkkf","name":"Kelegon","archived":false,"level":20,"rank":"officer"},
-  {"id":"msuci22hotnlf","name":"Mazuzahn","archived":false,"level":14,"rank":"veteran"},
-  {"id":"msuci22hnxvo8","name":"DutyNhonor","archived":false,"level":15,"rank":"veteran"},
-  {"id":"msuci22h6wxu4","name":"Nerdailas","archived":false,"level":18,"rank":"veteran"},
-  {"id":"msuci22h5oqcv","name":"Thordirn","archived":false,"level":15,"rank":"veteran"},
-  {"id":"msuci22h4n3b1","name":"Bein","archived":false,"level":11,"rank":"veteran"},
-  {"id":"msuci22hsg228","name":"Blondiespeedracr","archived":false,"level":14,"rank":"veteran"},
-  {"id":"msuci22hy9u0s","name":"Artsakh","archived":false,"level":13,"rank":"veteran"},
-  {"id":"msuci22he6sdv","name":"Dagore","archived":false,"level":12,"rank":"veteran"},
-  {"id":"msuci22hz0mho","name":"Lirosin","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22hoh370","name":"Lorbrinir","archived":false,"level":14,"rank":"soldier"},
-  {"id":"msuci22hsytc2","name":"Eyloten","archived":false,"level":12,"rank":"soldier"},
-  {"id":"msuci22h9i083","name":"Eydanen","archived":false,"level":12,"rank":"soldier"},
-  {"id":"msuci22h8eqv0","name":"Ceretius","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22h8cf4d","name":"Ceretius-2","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22h2h4q1","name":"Envening","archived":false,"level":12,"rank":"soldier"},
-  {"id":"msuci22hsi8sf","name":"Orodfed","archived":false,"level":11,"rank":"officer"},
-  {"id":"msuci22hn21fe","name":"Tuzshura","archived":false,"level":11,"rank":"officer"},
-  {"id":"msuci22h1rljr","name":"Digol","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22hxxnlh","name":"Tomuro","archived":false,"level":12,"rank":"veteran"},
-  {"id":"msuci22hwwia4","name":"Brainmin","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22h2nvfn","name":"Sirarad","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22h9u1u3","name":"Darineyl","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22hsz2iq","name":"Legon","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22hq73u7","name":"Aydael","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22h9csa4","name":"Mazalago","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22hnrsdu","name":"Ariron","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22h7howy","name":"Lorbriman","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22hjrys2","name":"Earninef","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22h4ftpy","name":"Halubrad","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22h695x2","name":"Tautaur","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22hjpzhy","name":"Celune","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22hhr5xm","name":"Lefinin","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22h061ff","name":"Taugal","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22hq81ne","name":"Finros","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22hnwb2d","name":"Argoleyl","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22hajcta","name":"Amaror","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22ihcf75","name":"Saldaning","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22ie2j8d","name":"Adorazius","archived":false,"level":11,"rank":"soldier"},
-  {"id":"msuci22iuelot","name":"Floyergus","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22i6rrn9","name":"Tygradi","archived":false,"level":10,"rank":"soldier"},
-  {"id":"msuci22iria8e","name":"Galafirilas","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22ip3576","name":"Dacage","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22it3rrs","name":"Manabandis","archived":false,"level":9,"rank":"veteran"},
-  {"id":"msuci22ihj9xj","name":"Babelle","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22ir75cm","name":"Nerneilas","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22i836jw","name":"Gushicage","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22itw4dj","name":"Lirafin","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22iekzsm","name":"Megin","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22ie5zgc","name":"Tagore","archived":false,"level":8,"rank":"soldier"},
-  {"id":"msuci22i06ed8","name":"Funfiren","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22igpgd7","name":"Maedrosor","archived":false,"level":8,"rank":"soldier"},
-  {"id":"msuci22ib351d","name":"Tefur","archived":false,"level":9,"rank":"soldier"},
-  {"id":"msuci22imfccm","name":"Niran","archived":false,"level":8,"rank":"soldier"},
-  {"id":"msuci22iabtl9","name":"Deli","archived":false,"level":7,"rank":"soldier"},
-  {"id":"msuci22iz2t1y","name":"Rainterror","archived":false,"level":6,"rank":"soldier"}
+  {
+   "id": "msuci22hjbxrg",
+   "name": "Doukree",
+   "archived": false,
+   "level": 37,
+   "rank": "leader"
+  },
+  {
+   "id": "msuci22hfuq5a",
+   "name": "Dukhn",
+   "archived": false,
+   "level": 16,
+   "rank": "superior"
+  },
+  {
+   "id": "msuci22hh9taw",
+   "name": "Fordrellador",
+   "archived": false,
+   "level": 14,
+   "rank": "superior"
+  },
+  {
+   "id": "msuci22hwtvj5",
+   "name": "Aybrineyl",
+   "archived": false,
+   "level": 29,
+   "rank": "officer"
+  },
+  {
+   "id": "msuci22hiqkkf",
+   "name": "Kelegon",
+   "archived": false,
+   "level": 20,
+   "rank": "officer"
+  },
+  {
+   "id": "msuci22hotnlf",
+   "name": "Mazuzahn",
+   "archived": false,
+   "level": 14,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22hnxvo8",
+   "name": "DutyNhonor",
+   "archived": false,
+   "level": 15,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22h6wxu4",
+   "name": "Nerdailas",
+   "archived": false,
+   "level": 18,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22h5oqcv",
+   "name": "Thordirn",
+   "archived": false,
+   "level": 15,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22h4n3b1",
+   "name": "Bein",
+   "archived": false,
+   "level": 11,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22hsg228",
+   "name": "Blondiespeedracr",
+   "archived": false,
+   "level": 14,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22hy9u0s",
+   "name": "Artsakh",
+   "archived": false,
+   "level": 13,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22he6sdv",
+   "name": "Dagore",
+   "archived": false,
+   "level": 12,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22hz0mho",
+   "name": "Lirosin",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hoh370",
+   "name": "Lorbrinir",
+   "archived": false,
+   "level": 14,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hsytc2",
+   "name": "Eyloten",
+   "archived": false,
+   "level": 12,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h9i083",
+   "name": "Eydanen",
+   "archived": false,
+   "level": 12,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h8eqv0",
+   "name": "Ceretius",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h8cf4d",
+   "name": "Ceretius-2",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h2h4q1",
+   "name": "Envening",
+   "archived": false,
+   "level": 12,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hsi8sf",
+   "name": "Orodfed",
+   "archived": false,
+   "level": 11,
+   "rank": "officer"
+  },
+  {
+   "id": "msuci22hn21fe",
+   "name": "Tuzshura",
+   "archived": false,
+   "level": 11,
+   "rank": "officer"
+  },
+  {
+   "id": "msuci22h1rljr",
+   "name": "Digol",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hxxnlh",
+   "name": "Tomuro",
+   "archived": false,
+   "level": 12,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22hwwia4",
+   "name": "Brainmin",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h2nvfn",
+   "name": "Sirarad",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h9u1u3",
+   "name": "Darineyl",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hsz2iq",
+   "name": "Legon",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hq73u7",
+   "name": "Aydael",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h9csa4",
+   "name": "Mazalago",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hnrsdu",
+   "name": "Ariron",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h7howy",
+   "name": "Lorbriman",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hjrys2",
+   "name": "Earninef",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h4ftpy",
+   "name": "Halubrad",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h695x2",
+   "name": "Tautaur",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hjpzhy",
+   "name": "Celune",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hhr5xm",
+   "name": "Lefinin",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22h061ff",
+   "name": "Taugal",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hq81ne",
+   "name": "Finros",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hnwb2d",
+   "name": "Argoleyl",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22hajcta",
+   "name": "Amaror",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22ihcf75",
+   "name": "Saldaning",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22ie2j8d",
+   "name": "Adorazius",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22iuelot",
+   "name": "Floyergus",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22i6rrn9",
+   "name": "Tygradi",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22iria8e",
+   "name": "Galafirilas",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22ip3576",
+   "name": "Dacage",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22it3rrs",
+   "name": "Manabandis",
+   "archived": false,
+   "level": 9,
+   "rank": "veteran"
+  },
+  {
+   "id": "msuci22ihj9xj",
+   "name": "Babelle",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22ir75cm",
+   "name": "Nerneilas",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22i836jw",
+   "name": "Gushicage",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22itw4dj",
+   "name": "Lirafin",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22iekzsm",
+   "name": "Megin",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22ie5zgc",
+   "name": "Tagore",
+   "archived": false,
+   "level": 8,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22i06ed8",
+   "name": "Funfiren",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22igpgd7",
+   "name": "Maedrosor",
+   "archived": false,
+   "level": 8,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22ib351d",
+   "name": "Tefur",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22imfccm",
+   "name": "Niran",
+   "archived": false,
+   "level": 8,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22iabtl9",
+   "name": "Deli",
+   "archived": false,
+   "level": 7,
+   "rank": "soldier"
+  },
+  {
+   "id": "msuci22iz2t1y",
+   "name": "Rainterror",
+   "archived": false,
+   "level": 6,
+   "rank": "soldier"
+  }
  ],
  "deliveries": [
-  {"id":"msudzaqduleks","mid":"msuci22hsg228","res":"iron","amount":64900,"date":"2026-08-15","note":""},
-  {"id":"msudzo9l9nl4o","mid":"msuci22hfuq5a","res":"iron","amount":128000,"date":"2026-08-14","note":""},
-  {"id":"msudzx6zvmdop","mid":"msuci22hfuq5a","res":"wood","amount":128000,"date":"2026-08-14","note":""},
-  {"id":"msue079mthus7","mid":"msuci22hiqkkf","res":"iron","amount":149000,"date":"2026-08-14","note":""},
-  {"id":"msue0gqrgjxj6","mid":"msuci22hiqkkf","res":"stone","amount":149000,"date":"2026-08-14","note":""},
-  {"id":"msue0sn2jmflm","mid":"msuci22hiqkkf","res":"wood","amount":151000,"date":"2026-08-14","note":""},
-  {"id":"msue18n6e58rv","mid":"msuci22hsg228","res":"iron","amount":64900,"date":"2026-08-14","note":""},
-  {"id":"msue1gwhbdhc9","mid":"msuci22hiqkkf","res":"stone","amount":144000,"date":"2026-08-14","note":""},
-  {"id":"msue1ofmlx7xy","mid":"msuci22hiqkkf","res":"stone","amount":149000,"date":"2026-08-14","note":""},
-  {"id":"msue1xwj15hiw","mid":"msuci22hiqkkf","res":"stone","amount":149000,"date":"2026-08-14","note":""},
-  {"id":"msue27qtyedc1","mid":"msuci22hsg228","res":"iron","amount":64900,"date":"2026-08-14","note":""},
-  {"id":"msue2gtlfj2ja","mid":"msuci22hwtvj5","res":"wood","amount":73400,"date":"2026-08-14","note":""},
-  {"id":"msue2orljqzbm","mid":"msuci22hwtvj5","res":"stone","amount":191000,"date":"2026-08-14","note":""},
-  {"id":"msue2u5046s4e","mid":"msuci22hwtvj5","res":"stone","amount":220000,"date":"2026-08-14","note":""},
-  {"id":"msue335dwjefq","mid":"msuci22hwtvj5","res":"stone","amount":220000,"date":"2026-08-14","note":""},
-  {"id":"msue3hr0jqcwl","mid":"msuci22hwtvj5","res":"iron","amount":158000,"date":"2026-08-14","note":""},
-  {"id":"msue3o5t19ber","mid":"msuci22hwtvj5","res":"iron","amount":220000,"date":"2026-08-14","note":""},
-  {"id":"msue3yyelh503","mid":"msuci22hsg228","res":"iron","amount":48400,"date":"2026-08-14","note":""},
-  {"id":"msue4b17p3e1x","mid":"msuci22hwtvj5","res":"iron","amount":82200,"date":"2026-08-14","note":""},
-  {"id":"msue4jcz6duzn","mid":"msuci22hwtvj5","res":"iron","amount":82300,"date":"2026-08-14","note":""},
-  {"id":"msue4qbznnvbv","mid":"msuci22hwtvj5","res":"iron","amount":63500,"date":"2026-08-14","note":""},
-  {"id":"msue50mdlej6j","mid":"msuci22hwtvj5","res":"iron","amount":40000,"date":"2026-08-14","note":""},
-  {"id":"msue5gy5nkv19","mid":"msuci22hiqkkf","res":"stone","amount":149000,"date":"2026-08-14","note":""},
-  {"id":"msue5ma8l2ykw","mid":"msuci22hiqkkf","res":"wood","amount":144000,"date":"2026-08-14","note":""},
-  {"id":"msue5svfjioeg","mid":"msuci22hiqkkf","res":"stone","amount":151000,"date":"2026-08-14","note":""},
-  {"id":"msue60qrbg8tc","mid":"msuci22hiqkkf","res":"stone","amount":149000,"date":"2026-08-14","note":""},
-  {"id":"msue65kytpxdr","mid":"msuci22hiqkkf","res":"stone","amount":151000,"date":"2026-08-14","note":""},
-  {"id":"msue6aifiavip","mid":"msuci22hiqkkf","res":"wood","amount":149000,"date":"2026-08-14","note":""},
-  {"id":"msue6g3f3y5aw","mid":"msuci22hiqkkf","res":"stone","amount":151000,"date":"2026-08-14","note":""},
-  {"id":"msue6mtod28of","mid":"msuci22hiqkkf","res":"wood","amount":149000,"date":"2026-08-14","note":""},
-  {"id":"msue6vhho1yex","mid":"msuci22hiqkkf","res":"stone","amount":151000,"date":"2026-08-14","note":""},
-  {"id":"msue759szv0o8","mid":"msuci22hiqkkf","res":"stone","amount":65900,"date":"2026-08-13","note":""},
-  {"id":"msue7waq4hgog","mid":"msuci22hfuq5a","res":"wood","amount":128000,"date":"2026-08-13","note":""},
-  {"id":"msue81u9wpztr","mid":"msuci22hfuq5a","res":"stone","amount":128000,"date":"2026-08-13","note":""},
-  {"id":"msue8k287gh6p","mid":"msuci22hfuq5a","res":"stone","amount":128000,"date":"2026-08-13","note":""},
-  {"id":"msue8oxrse9gk","mid":"msuci22hfuq5a","res":"wood","amount":128000,"date":"2026-08-13","note":""},
-  {"id":"msue92aa5eo9n","mid":"msuci22hfuq5a","res":"wood","amount":112000,"date":"2026-08-12","note":""},
-  {"id":"msue9gwkydhej","mid":"msuci22hfuq5a","res":"stone","amount":80400,"date":"2026-08-12","note":""},
-  {"id":"msue9pb4duizq","mid":"msuci22hfuq5a","res":"stone","amount":79700,"date":"2026-08-12","note":""},
-  {"id":"msue9v7epexq5","mid":"msuci22hfuq5a","res":"iron","amount":80400,"date":"2026-08-12","note":""},
-  {"id":"msuea7m66ncxf","mid":"msuci22h1rljr","res":"stone","amount":64300,"date":"2026-08-12","note":""},
-  {"id":"msuead8752lor","mid":"msuci22h1rljr","res":"iron","amount":64300,"date":"2026-08-12","note":""},
-  {"id":"msueai5w40dan","mid":"msuci22h1rljr","res":"wood","amount":64300,"date":"2026-08-12","note":""},
-  {"id":"msueaulogue4j","mid":"msuci22h1rljr","res":"iron","amount":64300,"date":"2026-08-12","note":""},
-  {"id":"msueb3562ogp5","mid":"msuci22h1rljr","res":"iron","amount":64300,"date":"2026-08-12","note":""},
-  {"id":"msueb70bfbgdx","mid":"msuci22h1rljr","res":"iron","amount":64300,"date":"2026-08-12","note":""},
-  {"id":"msuebc905g2f1","mid":"msuci22h1rljr","res":"wood","amount":64300,"date":"2026-08-12","note":""},
-  {"id":"msuecvgfrwzbs","mid":"msuci22hjbxrg","res":"wood","amount":14000000,"date":"2026-08-10","note":""},
-  {"id":"msuecxmke50ge","mid":"msuci22hjbxrg","res":"stone","amount":14000000,"date":"2026-08-10","note":""},
-  {"id":"msueczp5mak1b","mid":"msuci22hjbxrg","res":"iron","amount":14000000,"date":"2026-08-10","note":""},
-  {"id":"msuhshczoratn","mid":"msuci22hwtvj5","res":"iron","amount":220000,"date":"2026-08-15","note":""},
-  {"id":"msuhsne9zdzbf","mid":"msuci22hwtvj5","res":"iron","amount":214000,"date":"2026-08-15","note":""},
-  {"id":"msuhsuwbp800q","mid":"msuci22hwtvj5","res":"iron","amount":220000,"date":"2026-08-15","note":""},
-  {"id":"msuht1deeofny","mid":"msuci22hwtvj5","res":"stone","amount":144000,"date":"2026-08-15","note":""}
+  {
+   "id": "msudzaqduleks",
+   "mid": "msuci22hsg228",
+   "res": "iron",
+   "amount": 64900,
+   "date": "2026-08-15",
+   "note": ""
+  },
+  {
+   "id": "msudzo9l9nl4o",
+   "mid": "msuci22hfuq5a",
+   "res": "iron",
+   "amount": 128000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msudzx6zvmdop",
+   "mid": "msuci22hfuq5a",
+   "res": "wood",
+   "amount": 128000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue079mthus7",
+   "mid": "msuci22hiqkkf",
+   "res": "iron",
+   "amount": 149000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue0gqrgjxj6",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 149000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue0sn2jmflm",
+   "mid": "msuci22hiqkkf",
+   "res": "wood",
+   "amount": 151000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue18n6e58rv",
+   "mid": "msuci22hsg228",
+   "res": "iron",
+   "amount": 64900,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue1gwhbdhc9",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 144000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue1ofmlx7xy",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 149000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue1xwj15hiw",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 149000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue27qtyedc1",
+   "mid": "msuci22hsg228",
+   "res": "iron",
+   "amount": 64900,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue2gtlfj2ja",
+   "mid": "msuci22hwtvj5",
+   "res": "wood",
+   "amount": 73400,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue2orljqzbm",
+   "mid": "msuci22hwtvj5",
+   "res": "stone",
+   "amount": 191000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue2u5046s4e",
+   "mid": "msuci22hwtvj5",
+   "res": "stone",
+   "amount": 220000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue335dwjefq",
+   "mid": "msuci22hwtvj5",
+   "res": "stone",
+   "amount": 220000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue3hr0jqcwl",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 158000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue3o5t19ber",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 220000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue3yyelh503",
+   "mid": "msuci22hsg228",
+   "res": "iron",
+   "amount": 48400,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue4b17p3e1x",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 82200,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue4jcz6duzn",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 82300,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue4qbznnvbv",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 63500,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue50mdlej6j",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 40000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue5gy5nkv19",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 149000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue5ma8l2ykw",
+   "mid": "msuci22hiqkkf",
+   "res": "wood",
+   "amount": 144000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue5svfjioeg",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 151000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue60qrbg8tc",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 149000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue65kytpxdr",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 151000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue6aifiavip",
+   "mid": "msuci22hiqkkf",
+   "res": "wood",
+   "amount": 149000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue6g3f3y5aw",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 151000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue6mtod28of",
+   "mid": "msuci22hiqkkf",
+   "res": "wood",
+   "amount": 149000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue6vhho1yex",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 151000,
+   "date": "2026-08-14",
+   "note": ""
+  },
+  {
+   "id": "msue759szv0o8",
+   "mid": "msuci22hiqkkf",
+   "res": "stone",
+   "amount": 65900,
+   "date": "2026-08-13",
+   "note": ""
+  },
+  {
+   "id": "msue7waq4hgog",
+   "mid": "msuci22hfuq5a",
+   "res": "wood",
+   "amount": 128000,
+   "date": "2026-08-13",
+   "note": ""
+  },
+  {
+   "id": "msue81u9wpztr",
+   "mid": "msuci22hfuq5a",
+   "res": "stone",
+   "amount": 128000,
+   "date": "2026-08-13",
+   "note": ""
+  },
+  {
+   "id": "msue8k287gh6p",
+   "mid": "msuci22hfuq5a",
+   "res": "stone",
+   "amount": 128000,
+   "date": "2026-08-13",
+   "note": ""
+  },
+  {
+   "id": "msue8oxrse9gk",
+   "mid": "msuci22hfuq5a",
+   "res": "wood",
+   "amount": 128000,
+   "date": "2026-08-13",
+   "note": ""
+  },
+  {
+   "id": "msue92aa5eo9n",
+   "mid": "msuci22hfuq5a",
+   "res": "wood",
+   "amount": 112000,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msue9gwkydhej",
+   "mid": "msuci22hfuq5a",
+   "res": "stone",
+   "amount": 80400,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msue9pb4duizq",
+   "mid": "msuci22hfuq5a",
+   "res": "stone",
+   "amount": 79700,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msue9v7epexq5",
+   "mid": "msuci22hfuq5a",
+   "res": "iron",
+   "amount": 80400,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msuea7m66ncxf",
+   "mid": "msuci22h1rljr",
+   "res": "stone",
+   "amount": 64300,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msuead8752lor",
+   "mid": "msuci22h1rljr",
+   "res": "iron",
+   "amount": 64300,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msueai5w40dan",
+   "mid": "msuci22h1rljr",
+   "res": "wood",
+   "amount": 64300,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msueaulogue4j",
+   "mid": "msuci22h1rljr",
+   "res": "iron",
+   "amount": 64300,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msueb3562ogp5",
+   "mid": "msuci22h1rljr",
+   "res": "iron",
+   "amount": 64300,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msueb70bfbgdx",
+   "mid": "msuci22h1rljr",
+   "res": "iron",
+   "amount": 64300,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msuebc905g2f1",
+   "mid": "msuci22h1rljr",
+   "res": "wood",
+   "amount": 64300,
+   "date": "2026-08-12",
+   "note": ""
+  },
+  {
+   "id": "msuecvgfrwzbs",
+   "mid": "msuci22hjbxrg",
+   "res": "wood",
+   "amount": 14000000,
+   "date": "2026-08-10",
+   "note": ""
+  },
+  {
+   "id": "msuecxmke50ge",
+   "mid": "msuci22hjbxrg",
+   "res": "stone",
+   "amount": 14000000,
+   "date": "2026-08-10",
+   "note": ""
+  },
+  {
+   "id": "msueczp5mak1b",
+   "mid": "msuci22hjbxrg",
+   "res": "iron",
+   "amount": 14000000,
+   "date": "2026-08-10",
+   "note": ""
+  },
+  {
+   "id": "msuhshczoratn",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 220000,
+   "date": "2026-08-15",
+   "note": ""
+  },
+  {
+   "id": "msuhsne9zdzbf",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 214000,
+   "date": "2026-08-15",
+   "note": ""
+  },
+  {
+   "id": "msuhsuwbp800q",
+   "mid": "msuci22hwtvj5",
+   "res": "iron",
+   "amount": 220000,
+   "date": "2026-08-15",
+   "note": ""
+  },
+  {
+   "id": "msuht1deeofny",
+   "mid": "msuci22hwtvj5",
+   "res": "stone",
+   "amount": 144000,
+   "date": "2026-08-15",
+   "note": ""
+  },
+  {
+   "id": "msvswrabnypng",
+   "mid": "msuci22hwtvj5",
+   "res": "stone",
+   "amount": 220000,
+   "date": "2026-08-15",
+   "note": ""
+  }
  ],
  "power": [
-  {"id":"msuci22hrf3j3","mid":"msuci22hjbxrg","value":534623,"date":"2026-08-15"},
-  {"id":"msuci22h5u8ie","mid":"msuci22hfuq5a","value":216719,"date":"2026-08-15"},
-  {"id":"msuci22hqe7in","mid":"msuci22hh9taw","value":168082,"date":"2026-08-15"},
-  {"id":"msuci22hs1ekl","mid":"msuci22hwtvj5","value":636272,"date":"2026-08-15"},
-  {"id":"msuci22h0voc9","mid":"msuci22hiqkkf","value":243566,"date":"2026-08-15"},
-  {"id":"msuci22hb0v24","mid":"msuci22hotnlf","value":347590,"date":"2026-08-15"},
-  {"id":"msuci22hnewyd","mid":"msuci22hnxvo8","value":295505,"date":"2026-08-15"},
-  {"id":"msuci22hcw0if","mid":"msuci22h6wxu4","value":235318,"date":"2026-08-15"},
-  {"id":"msuci22h9a2fd","mid":"msuci22h5oqcv","value":213447,"date":"2026-08-15"},
-  {"id":"msuci22h5vefa","mid":"msuci22h4n3b1","value":203163,"date":"2026-08-15"},
-  {"id":"msuci22hdxvaj","mid":"msuci22hsg228","value":111423,"date":"2026-08-15"},
-  {"id":"msuci22hip9ub","mid":"msuci22hy9u0s","value":111332,"date":"2026-08-15"},
-  {"id":"msuci22hq8uwl","mid":"msuci22he6sdv","value":108057,"date":"2026-08-15"},
-  {"id":"msuci22h7dieb","mid":"msuci22hz0mho","value":97323,"date":"2026-08-15"},
-  {"id":"msuci22hr27d2","mid":"msuci22hoh370","value":95460,"date":"2026-08-15"},
-  {"id":"msuci22h5ugfw","mid":"msuci22hsytc2","value":87941,"date":"2026-08-15"},
-  {"id":"msuci22h4zmuk","mid":"msuci22h9i083","value":87211,"date":"2026-08-15"},
-  {"id":"msuci22hascr7","mid":"msuci22h8eqv0","value":86999,"date":"2026-08-15"},
-  {"id":"msuci22hyqdx4","mid":"msuci22h8cf4d","value":41988,"date":"2026-08-15"},
-  {"id":"msuci22hhrwf2","mid":"msuci22h2h4q1","value":81495,"date":"2026-08-15"},
-  {"id":"msuci22h0abiu","mid":"msuci22hsi8sf","value":78745,"date":"2026-08-15"},
-  {"id":"msuci22hmb24n","mid":"msuci22hn21fe","value":78157,"date":"2026-08-15"},
-  {"id":"msuci22ho1xjb","mid":"msuci22h1rljr","value":72319,"date":"2026-08-15"},
-  {"id":"msuci22hfzndo","mid":"msuci22hxxnlh","value":70327,"date":"2026-08-15"},
-  {"id":"msuci22hgdpmz","mid":"msuci22hwwia4","value":65739,"date":"2026-08-15"},
-  {"id":"msuci22hvfe4x","mid":"msuci22h2nvfn","value":65077,"date":"2026-08-15"},
-  {"id":"msuci22hw2q8s","mid":"msuci22h9u1u3","value":61733,"date":"2026-08-15"},
-  {"id":"msuci22hyaznt","mid":"msuci22hsz2iq","value":60240,"date":"2026-08-15"},
-  {"id":"msuci22hoe8mj","mid":"msuci22hq73u7","value":58555,"date":"2026-08-15"},
-  {"id":"msuci22hkfv6f","mid":"msuci22h9csa4","value":57402,"date":"2026-08-15"},
-  {"id":"msuci22h5pw46","mid":"msuci22hnrsdu","value":54887,"date":"2026-08-15"},
-  {"id":"msuci22h1v0tk","mid":"msuci22h7howy","value":54865,"date":"2026-08-15"},
-  {"id":"msuci22hemlmw","mid":"msuci22hjrys2","value":54225,"date":"2026-08-15"},
-  {"id":"msuci22hzjlwx","mid":"msuci22h4ftpy","value":52682,"date":"2026-08-15"},
-  {"id":"msuci22hpwibd","mid":"msuci22h695x2","value":50491,"date":"2026-08-15"},
-  {"id":"msuci22h7nnrl","mid":"msuci22hjpzhy","value":48580,"date":"2026-08-15"},
-  {"id":"msuci22hil9bm","mid":"msuci22hhr5xm","value":48207,"date":"2026-08-15"},
-  {"id":"msuci22hzy0qe","mid":"msuci22h061ff","value":48206,"date":"2026-08-15"},
-  {"id":"msuci22hihonl","mid":"msuci22hq81ne","value":47570,"date":"2026-08-15"},
-  {"id":"msuci22h1n4b1","mid":"msuci22hnwb2d","value":45273,"date":"2026-08-15"},
-  {"id":"msuci22hmtsc3","mid":"msuci22hajcta","value":40148,"date":"2026-08-15"},
-  {"id":"msuci22ix0rqk","mid":"msuci22ihcf75","value":39851,"date":"2026-08-15"},
-  {"id":"msuci22i3te51","mid":"msuci22ie2j8d","value":37309,"date":"2026-08-15"},
-  {"id":"msuci22ixndr0","mid":"msuci22iuelot","value":36975,"date":"2026-08-15"},
-  {"id":"msuci22isu9tl","mid":"msuci22i6rrn9","value":36127,"date":"2026-08-15"},
-  {"id":"msuci22i5mlnl","mid":"msuci22iria8e","value":34922,"date":"2026-08-15"},
-  {"id":"msuci22ik3ser","mid":"msuci22ip3576","value":34646,"date":"2026-08-15"},
-  {"id":"msuci22i9ta2s","mid":"msuci22it3rrs","value":32668,"date":"2026-08-15"},
-  {"id":"msuci22iudpsz","mid":"msuci22ihj9xj","value":27750,"date":"2026-08-15"},
-  {"id":"msuci22ijr0po","mid":"msuci22ir75cm","value":27122,"date":"2026-08-15"},
-  {"id":"msuci22i8nb3j","mid":"msuci22i836jw","value":25709,"date":"2026-08-15"},
-  {"id":"msuci22ic8959","mid":"msuci22itw4dj","value":24563,"date":"2026-08-15"},
-  {"id":"msuci22iebql0","mid":"msuci22iekzsm","value":22305,"date":"2026-08-15"},
-  {"id":"msuci22i6su5n","mid":"msuci22ie5zgc","value":18435,"date":"2026-08-15"},
-  {"id":"msuci22idkbl2","mid":"msuci22i06ed8","value":18354,"date":"2026-08-15"},
-  {"id":"msuci22ihu1v1","mid":"msuci22igpgd7","value":18273,"date":"2026-08-15"},
-  {"id":"msuci22ieslp1","mid":"msuci22ib351d","value":18241,"date":"2026-08-15"},
-  {"id":"msuci22in0kb1","mid":"msuci22imfccm","value":16371,"date":"2026-08-15"},
-  {"id":"msuci22iu4flb","mid":"msuci22iabtl9","value":14412,"date":"2026-08-15"},
-  {"id":"msuci22iqhsbu","mid":"msuci22iz2t1y","value":11117,"date":"2026-08-15"}
+  {
+   "id": "msuci22hrf3j3",
+   "mid": "msuci22hjbxrg",
+   "value": 534623,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h5u8ie",
+   "mid": "msuci22hfuq5a",
+   "value": 216719,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hqe7in",
+   "mid": "msuci22hh9taw",
+   "value": 168082,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hs1ekl",
+   "mid": "msuci22hwtvj5",
+   "value": 636272,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h0voc9",
+   "mid": "msuci22hiqkkf",
+   "value": 243566,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hb0v24",
+   "mid": "msuci22hotnlf",
+   "value": 347590,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hnewyd",
+   "mid": "msuci22hnxvo8",
+   "value": 295505,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hcw0if",
+   "mid": "msuci22h6wxu4",
+   "value": 235318,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h9a2fd",
+   "mid": "msuci22h5oqcv",
+   "value": 213447,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h5vefa",
+   "mid": "msuci22h4n3b1",
+   "value": 203163,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hdxvaj",
+   "mid": "msuci22hsg228",
+   "value": 111423,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hip9ub",
+   "mid": "msuci22hy9u0s",
+   "value": 111332,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hq8uwl",
+   "mid": "msuci22he6sdv",
+   "value": 108057,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h7dieb",
+   "mid": "msuci22hz0mho",
+   "value": 97323,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hr27d2",
+   "mid": "msuci22hoh370",
+   "value": 95460,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h5ugfw",
+   "mid": "msuci22hsytc2",
+   "value": 87941,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h4zmuk",
+   "mid": "msuci22h9i083",
+   "value": 87211,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hascr7",
+   "mid": "msuci22h8eqv0",
+   "value": 86999,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hyqdx4",
+   "mid": "msuci22h8cf4d",
+   "value": 41988,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hhrwf2",
+   "mid": "msuci22h2h4q1",
+   "value": 81495,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h0abiu",
+   "mid": "msuci22hsi8sf",
+   "value": 78745,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hmb24n",
+   "mid": "msuci22hn21fe",
+   "value": 78157,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22ho1xjb",
+   "mid": "msuci22h1rljr",
+   "value": 72319,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hfzndo",
+   "mid": "msuci22hxxnlh",
+   "value": 70327,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hgdpmz",
+   "mid": "msuci22hwwia4",
+   "value": 65739,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hvfe4x",
+   "mid": "msuci22h2nvfn",
+   "value": 65077,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hw2q8s",
+   "mid": "msuci22h9u1u3",
+   "value": 61733,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hyaznt",
+   "mid": "msuci22hsz2iq",
+   "value": 60240,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hoe8mj",
+   "mid": "msuci22hq73u7",
+   "value": 58555,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hkfv6f",
+   "mid": "msuci22h9csa4",
+   "value": 57402,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h5pw46",
+   "mid": "msuci22hnrsdu",
+   "value": 54887,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h1v0tk",
+   "mid": "msuci22h7howy",
+   "value": 54865,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hemlmw",
+   "mid": "msuci22hjrys2",
+   "value": 54225,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hzjlwx",
+   "mid": "msuci22h4ftpy",
+   "value": 52682,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hpwibd",
+   "mid": "msuci22h695x2",
+   "value": 50491,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h7nnrl",
+   "mid": "msuci22hjpzhy",
+   "value": 48580,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hil9bm",
+   "mid": "msuci22hhr5xm",
+   "value": 48207,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hzy0qe",
+   "mid": "msuci22h061ff",
+   "value": 48206,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hihonl",
+   "mid": "msuci22hq81ne",
+   "value": 47570,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22h1n4b1",
+   "mid": "msuci22hnwb2d",
+   "value": 45273,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22hmtsc3",
+   "mid": "msuci22hajcta",
+   "value": 40148,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22ix0rqk",
+   "mid": "msuci22ihcf75",
+   "value": 39851,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22i3te51",
+   "mid": "msuci22ie2j8d",
+   "value": 37309,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22ixndr0",
+   "mid": "msuci22iuelot",
+   "value": 36975,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22isu9tl",
+   "mid": "msuci22i6rrn9",
+   "value": 36127,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22i5mlnl",
+   "mid": "msuci22iria8e",
+   "value": 34922,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22ik3ser",
+   "mid": "msuci22ip3576",
+   "value": 34646,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22i9ta2s",
+   "mid": "msuci22it3rrs",
+   "value": 32668,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22iudpsz",
+   "mid": "msuci22ihj9xj",
+   "value": 27750,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22ijr0po",
+   "mid": "msuci22ir75cm",
+   "value": 27122,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22i8nb3j",
+   "mid": "msuci22i836jw",
+   "value": 25709,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22ic8959",
+   "mid": "msuci22itw4dj",
+   "value": 24563,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22iebql0",
+   "mid": "msuci22iekzsm",
+   "value": 22305,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22i6su5n",
+   "mid": "msuci22ie5zgc",
+   "value": 18435,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22idkbl2",
+   "mid": "msuci22i06ed8",
+   "value": 18354,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22ihu1v1",
+   "mid": "msuci22igpgd7",
+   "value": 18273,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22ieslp1",
+   "mid": "msuci22ib351d",
+   "value": 18241,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22in0kb1",
+   "mid": "msuci22imfccm",
+   "value": 16371,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22iu4flb",
+   "mid": "msuci22iabtl9",
+   "value": 14412,
+   "date": "2026-08-15"
+  },
+  {
+   "id": "msuci22iqhsbu",
+   "mid": "msuci22iz2t1y",
+   "value": 11117,
+   "date": "2026-08-15"
+  }
  ],
  "me": "msuci22hjbxrg",
  "msgTop": 8,
- "gone": {"members": [], "deliveries": []},
- "fixups": {"ranks": true, "ceretius2": true}
+ "gone": {
+  "members": [],
+  "deliveries": []
+ },
+ "fixups": {
+  "ranks": true,
+  "ceretius2": true
+ }
 }
