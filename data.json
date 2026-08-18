@@ -2929,14 +2929,6 @@
    "amount": 216000,
    "date": "2026-08-18",
    "note": ""
-  },
-  {
-   "id": "msz2z0g7pq3jk",
-   "mid": "msuci22hwtvj5",
-   "res": "wood",
-   "amount": 222000,
-   "date": "2026-08-18",
-   "note": ""
   }
  ],
  "power": [
@@ -3653,7 +3645,9 @@
  "msgTop": 5,
  "gone": {
   "members": [],
-  "deliveries": []
+  "deliveries": [
+   "msz2z0g7pq3jk"
+  ]
  },
  "fixups": {
   "ranks": true,
