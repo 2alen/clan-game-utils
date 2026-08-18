@@ -611,10 +611,19 @@ function ghHeaders() {
   if (meta.token) h['Authorization'] = 'Bearer ' + meta.token;
   return h;
 }
-async function ghPull() {
+async function ghPull(retried) {
   const url = `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${GH.path}?ref=${encodeURIComponent(meta.branch)}`;
   const res = await fetch(url, { headers: ghHeaders(), cache: 'no-store' });
-  if (res.status === 404) { remoteSha = null; return null; }
+  if (res.status === 404) {
+    /* ветки могло не остаться — один раз откатываемся на основную */
+    if (!retried && meta.branch !== GH.defBranch) {
+      meta.branch = GH.defBranch; saveMeta();
+      const el = document.getElementById('ghBranch');
+      if (el) el.value = meta.branch;
+      return ghPull(true);
+    }
+    remoteSha = null; return null;
+  }
   if (!res.ok) { const e = new Error('http'); e.status = res.status; throw e; }
   const j = await res.json();
   remoteSha = j.sha;
