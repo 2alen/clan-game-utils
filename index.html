@@ -578,10 +578,15 @@ let state = blank();
 })();
 
 /* ============ синхронизация: data.json в GitHub — единый источник правды ============ */
-const GH = { owner: '2alen', repo: 'clan-game-utils', path: 'data.json', defBranch: 'claude/clan-resource-tracker-nnt9fi' };
+const GH = { owner: '2alen', repo: 'clan-game-utils', path: 'data.json', defBranch: 'main' };
 const META_KEY = 'clan-treasury-sync';
 let meta = { token: '', branch: GH.defBranch, dirty: false, lastSync: 0 };
 try { Object.assign(meta, JSON.parse(localStorage.getItem(META_KEY) || '{}')); } catch (e) {}
+/* данные переехали в main — старые устройства переключаем один раз, ручной выбор ветки дальше не трогаем */
+if (!meta.movedToMain) {
+  if (meta.branch === 'claude/clan-resource-tracker-nnt9fi') meta.branch = 'main';
+  meta.movedToMain = true; saveMeta();
+}
 function saveMeta() { localStorage.setItem(META_KEY, JSON.stringify(meta)); }
 
 let remoteSha = null;
@@ -712,18 +717,24 @@ async function syncNow() {
       remote.members.length !== merged.members.length ||
       remote.power.length !== merged.power.length;
     if (needPush) await ghPush();
+    conflictRetries = 0;
     meta.dirty = false; meta.lastSync = Date.now(); saveMeta();
     syncState = 'ok';
     renderAll();
   } catch (err) {
     if (err && err.status === 401) { syncState = 'error'; syncErrText = 'токен не принят GitHub'; }
     else if (err && err.status === 403) { syncState = 'error'; syncErrText = 'нет доступа — проверьте права токена (Contents: Read and write)'; }
-    else if (err && err.status === 409) { syncState = 'pending'; scheduleSync(); }
+    else if (err && (err.status === 409 || err.status === 422)) {
+      /* гонка версий: кто-то закоммитил одновременно — перечитываем и пробуем ещё раз */
+      if (++conflictRetries <= 3) { syncState = 'pending'; scheduleSync(); }
+      else { syncState = 'error'; syncErrText = 'конфликт версий — обновите страницу'; }
+    }
     else if (err && err.status) { syncState = 'error'; syncErrText = 'GitHub ответил ' + err.status; }
     else { syncState = 'offline'; }
     renderSyncChip();
   }
 }
+let conflictRetries = 0;
 function scheduleSync() {
   clearTimeout(syncTimer);
   syncTimer = setTimeout(syncNow, 1500);
