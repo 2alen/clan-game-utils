@@ -134,7 +134,7 @@
   {
    "id": "msuci22h8cf4d",
    "name": "Ceretius-2",
-   "archived": false,
+   "archived": true,
    "level": 10,
    "rank": "soldier"
   },
@@ -183,7 +183,7 @@
   {
    "id": "msuci22h2nvfn",
    "name": "Sirarad",
-   "archived": false,
+   "archived": true,
    "level": 10,
    "rank": "soldier"
   },
@@ -197,7 +197,7 @@
   {
    "id": "msuci22hsz2iq",
    "name": "Legon",
-   "archived": false,
+   "archived": true,
    "level": 11,
    "rank": "soldier"
   },
@@ -211,7 +211,7 @@
   {
    "id": "msuci22h9csa4",
    "name": "Mazalago",
-   "archived": false,
+   "archived": true,
    "level": 11,
    "rank": "soldier"
   },
@@ -302,7 +302,7 @@
   {
    "id": "msuci22ie2j8d",
    "name": "Adorazius",
-   "archived": false,
+   "archived": true,
    "level": 11,
    "rank": "soldier"
   },
@@ -316,7 +316,7 @@
   {
    "id": "msuci22i6rrn9",
    "name": "Tygradi",
-   "archived": false,
+   "archived": true,
    "level": 10,
    "rank": "soldier"
   },
@@ -330,7 +330,7 @@
   {
    "id": "msuci22ip3576",
    "name": "Dacage",
-   "archived": false,
+   "archived": true,
    "level": 9,
    "rank": "soldier"
   },
@@ -358,7 +358,7 @@
   {
    "id": "msuci22i836jw",
    "name": "Gushicage",
-   "archived": false,
+   "archived": true,
    "level": 9,
    "rank": "soldier"
   },
@@ -372,7 +372,7 @@
   {
    "id": "msuci22iekzsm",
    "name": "Megin",
-   "archived": false,
+   "archived": true,
    "level": 9,
    "rank": "soldier"
   },
@@ -386,7 +386,7 @@
   {
    "id": "msuci22i06ed8",
    "name": "Funfiren",
-   "archived": false,
+   "archived": true,
    "level": 9,
    "rank": "soldier"
   },
@@ -421,7 +421,7 @@
   {
    "id": "msuci22iz2t1y",
    "name": "Rainterror",
-   "archived": false,
+   "archived": true,
    "level": 6,
    "rank": "soldier"
   },
