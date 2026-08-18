@@ -28,7 +28,7 @@
   },
   {
    "id": "msuci22hwtvj5",
-   "name": "Aybrineyl",
+   "name": "Bronn",
    "archived": false,
    "level": 29,
    "rank": "officer"
@@ -424,13 +424,6 @@
    "archived": false,
    "level": 6,
    "rank": "soldier"
-  },
-  {
-   "id": "msuci22hwtvj5",
-   "name": "Bronn",
-   "archived": false,
-   "level": 29,
-   "rank": "officer"
   }
  ],
  "deliveries": [

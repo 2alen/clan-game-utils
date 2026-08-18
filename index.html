@@ -641,27 +641,35 @@ function mergeStates(remote, local, preferLocal) {
   };
   const goneM = new Set(out.gone.members), goneD = new Set(out.gone.deliveries);
 
-  const byName = new Map();
-  for (const m of remote.members) byName.set(m.name.toLowerCase(), { ...m });
+  /* сопоставление участников: сначала по id (переименованный ник — тот же человек), потом по нику */
+  const mergedM = new Map();
+  const idByName = new Map();
+  for (const m of remote.members) {
+    mergedM.set(m.id, { ...m });               // повторный id перезаписывает — самолечение дублей
+    idByName.set(m.name.toLowerCase(), m.id);
+  }
   const idMap = new Map();
   for (const m of local.members) {
-    const key = m.name.toLowerCase();
-    const ex = byName.get(key);
-    if (ex) {
-      idMap.set(m.id, ex.id);
+    let target = mergedM.get(m.id);
+    if (!target) {
+      const tid = idByName.get(m.name.toLowerCase());
+      if (tid !== undefined) { target = mergedM.get(tid); idMap.set(m.id, tid); }
+    }
+    if (target) {
       if (preferLocal) {
-        if (m.level) ex.level = m.level;
-        if (m.rank) ex.rank = m.rank;
-        ex.archived = !!m.archived;
+        target.name = m.name;                  // переименование уезжает в git
+        if (m.level) target.level = m.level;
+        if (m.rank) target.rank = m.rank;
+        target.archived = !!m.archived;
       } else {
-        if (m.level && !ex.level) ex.level = m.level;
-        if (m.rank && !ex.rank) ex.rank = m.rank;
+        if (m.level && !target.level) target.level = m.level;
+        if (m.rank && !target.rank) target.rank = m.rank;
       }
     } else {
-      byName.set(key, { ...m });
+      mergedM.set(m.id, { ...m });
     }
   }
-  out.members = [...byName.values()].filter(m => !goneM.has(m.id));
+  out.members = [...mergedM.values()].filter(m => !goneM.has(m.id));
   const remap = id => idMap.get(id) || id;
 
   const dmap = new Map();
