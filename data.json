@@ -9,14 +9,14 @@
    "id": "msuci22hjbxrg",
    "name": "Doukree",
    "archived": false,
-   "level": 37,
+   "level": 38,
    "rank": "leader"
   },
   {
    "id": "msuci22hfuq5a",
    "name": "Dukhn",
    "archived": false,
-   "level": 16,
+   "level": 32,
    "rank": "superior"
   },
   {
@@ -30,14 +30,14 @@
    "id": "msuci22hwtvj5",
    "name": "Bronn",
    "archived": false,
-   "level": 29,
+   "level": 32,
    "rank": "officer"
   },
   {
    "id": "msuci22hiqkkf",
    "name": "Kelegon",
    "archived": false,
-   "level": 20,
+   "level": 21,
    "rank": "officer"
   },
   {
@@ -59,14 +59,14 @@
    "name": "Nerdailas",
    "archived": false,
    "level": 18,
-   "rank": "veteran"
+   "rank": "officer"
   },
   {
    "id": "msuci22h5oqcv",
    "name": "Thordirn",
    "archived": false,
-   "level": 15,
-   "rank": "veteran"
+   "level": 16,
+   "rank": "officer"
   },
   {
    "id": "msuci22h4n3b1",
@@ -93,7 +93,7 @@
    "id": "msuci22he6sdv",
    "name": "Dagore",
    "archived": false,
-   "level": 12,
+   "level": 13,
    "rank": "veteran"
   },
   {
@@ -157,7 +157,7 @@
    "name": "Tuzshura",
    "archived": false,
    "level": 11,
-   "rank": "officer"
+   "rank": "veteran"
   },
   {
    "id": "msuci22h1rljr",
@@ -233,7 +233,7 @@
    "id": "msuci22hjrys2",
    "name": "Earninef",
    "archived": false,
-   "level": 10,
+   "level": 11,
    "rank": "soldier"
   },
   {
@@ -275,14 +275,14 @@
    "id": "msuci22hq81ne",
    "name": "Finros",
    "archived": false,
-   "level": 10,
+   "level": 11,
    "rank": "soldier"
   },
   {
    "id": "msuci22hnwb2d",
    "name": "Argoleyl",
    "archived": false,
-   "level": 9,
+   "level": 10,
    "rank": "soldier"
   },
   {
@@ -310,7 +310,7 @@
    "id": "msuci22iuelot",
    "name": "Floyergus",
    "archived": false,
-   "level": 10,
+   "level": 11,
    "rank": "soldier"
   },
   {
@@ -380,7 +380,7 @@
    "id": "msuci22ie5zgc",
    "name": "Tagore",
    "archived": false,
-   "level": 8,
+   "level": 9,
    "rank": "soldier"
   },
   {
@@ -401,21 +401,21 @@
    "id": "msuci22ib351d",
    "name": "Tefur",
    "archived": false,
-   "level": 9,
+   "level": 10,
    "rank": "soldier"
   },
   {
    "id": "msuci22imfccm",
    "name": "Niran",
    "archived": false,
-   "level": 8,
+   "level": 9,
    "rank": "soldier"
   },
   {
    "id": "msuci22iabtl9",
    "name": "Deli",
    "archived": false,
-   "level": 7,
+   "level": 8,
    "rank": "soldier"
   },
   {
@@ -423,6 +423,69 @@
    "name": "Rainterror",
    "archived": false,
    "level": 6,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-nimanen",
+   "name": "Nimanen",
+   "archived": false,
+   "level": 11,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-nifur",
+   "name": "Nifur",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-vudogore",
+   "name": "Vudogore",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-malann",
+   "name": "Malann",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-floydrodzhil",
+   "name": "Floydrodzhil",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-granilbine",
+   "name": "Granilbine",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-mogamand",
+   "name": "Mogamand",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-lorfinad",
+   "name": "Lorfinad",
+   "archived": false,
+   "level": 9,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-snoweye",
+   "name": "Snoweye",
+   "archived": false,
+   "level": 8,
    "rank": "soldier"
   }
  ],
@@ -2940,6 +3003,354 @@
    "mid": "msuci22iz2t1y",
    "value": 11117,
    "date": "2026-08-15"
+  },
+  {
+   "id": "p-msuci22hjbxrg-2026-08-18",
+   "mid": "msuci22hjbxrg",
+   "value": 687139,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hfuq5a-2026-08-18",
+   "mid": "msuci22hfuq5a",
+   "value": 459750,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hh9taw-2026-08-18",
+   "mid": "msuci22hh9taw",
+   "value": 168082,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hwtvj5-2026-08-18",
+   "mid": "msuci22hwtvj5",
+   "value": 1047577,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h6wxu4-2026-08-18",
+   "mid": "msuci22h6wxu4",
+   "value": 263018,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hiqkkf-2026-08-18",
+   "mid": "msuci22hiqkkf",
+   "value": 256425,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h5oqcv-2026-08-18",
+   "mid": "msuci22h5oqcv",
+   "value": 235161,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hsi8sf-2026-08-18",
+   "mid": "msuci22hsi8sf",
+   "value": 93245,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hotnlf-2026-08-18",
+   "mid": "msuci22hotnlf",
+   "value": 347590,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hnxvo8-2026-08-18",
+   "mid": "msuci22hnxvo8",
+   "value": 295505,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h4n3b1-2026-08-18",
+   "mid": "msuci22h4n3b1",
+   "value": 203683,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hsg228-2026-08-18",
+   "mid": "msuci22hsg228",
+   "value": 129384,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22he6sdv-2026-08-18",
+   "mid": "msuci22he6sdv",
+   "value": 127057,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hy9u0s-2026-08-18",
+   "mid": "msuci22hy9u0s",
+   "value": 114417,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hxxnlh-2026-08-18",
+   "mid": "msuci22hxxnlh",
+   "value": 80132,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hn21fe-2026-08-18",
+   "mid": "msuci22hn21fe",
+   "value": 78157,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22it3rrs-2026-08-18",
+   "mid": "msuci22it3rrs",
+   "value": 35310,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h8eqv0-2026-08-18",
+   "mid": "msuci22h8eqv0",
+   "value": 126195,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hoh370-2026-08-18",
+   "mid": "msuci22hoh370",
+   "value": 111585,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hsytc2-2026-08-18",
+   "mid": "msuci22hsytc2",
+   "value": 104397,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hz0mho-2026-08-18",
+   "mid": "msuci22hz0mho",
+   "value": 99328,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h9i083-2026-08-18",
+   "mid": "msuci22h9i083",
+   "value": 97187,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h2h4q1-2026-08-18",
+   "mid": "msuci22h2h4q1",
+   "value": 82145,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h1rljr-2026-08-18",
+   "mid": "msuci22h1rljr",
+   "value": 77050,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hwwia4-2026-08-18",
+   "mid": "msuci22hwwia4",
+   "value": 68885,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h9u1u3-2026-08-18",
+   "mid": "msuci22h9u1u3",
+   "value": 67296,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hjrys2-2026-08-18",
+   "mid": "msuci22hjrys2",
+   "value": 61660,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hnrsdu-2026-08-18",
+   "mid": "msuci22hnrsdu",
+   "value": 61526,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h061ff-2026-08-18",
+   "mid": "msuci22h061ff",
+   "value": 59954,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-nimanen-2026-08-18",
+   "mid": "m-nimanen",
+   "value": 59346,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hq73u7-2026-08-18",
+   "mid": "msuci22hq73u7",
+   "value": 58555,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hq81ne-2026-08-18",
+   "mid": "msuci22hq81ne",
+   "value": 57812,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hjpzhy-2026-08-18",
+   "mid": "msuci22hjpzhy",
+   "value": 55728,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h7howy-2026-08-18",
+   "mid": "msuci22h7howy",
+   "value": 55637,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hnwb2d-2026-08-18",
+   "mid": "msuci22hnwb2d",
+   "value": 55282,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hhr5xm-2026-08-18",
+   "mid": "msuci22hhr5xm",
+   "value": 55077,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h4ftpy-2026-08-18",
+   "mid": "msuci22h4ftpy",
+   "value": 53592,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22ihcf75-2026-08-18",
+   "mid": "msuci22ihcf75",
+   "value": 53332,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22h695x2-2026-08-18",
+   "mid": "msuci22h695x2",
+   "value": 52973,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-nifur-2026-08-18",
+   "mid": "m-nifur",
+   "value": 51601,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22iuelot-2026-08-18",
+   "mid": "msuci22iuelot",
+   "value": 48622,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-vudogore-2026-08-18",
+   "mid": "m-vudogore",
+   "value": 48153,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-malann-2026-08-18",
+   "mid": "m-malann",
+   "value": 48130,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22hajcta-2026-08-18",
+   "mid": "msuci22hajcta",
+   "value": 40586,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22iria8e-2026-08-18",
+   "mid": "msuci22iria8e",
+   "value": 38501,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-floydrodzhil-2026-08-18",
+   "mid": "m-floydrodzhil",
+   "value": 37133,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-granilbine-2026-08-18",
+   "mid": "m-granilbine",
+   "value": 31750,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22ib351d-2026-08-18",
+   "mid": "msuci22ib351d",
+   "value": 31661,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22ihj9xj-2026-08-18",
+   "mid": "msuci22ihj9xj",
+   "value": 31136,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-mogamand-2026-08-18",
+   "mid": "m-mogamand",
+   "value": 30394,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22imfccm-2026-08-18",
+   "mid": "msuci22imfccm",
+   "value": 29943,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-lorfinad-2026-08-18",
+   "mid": "m-lorfinad",
+   "value": 29760,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22ir75cm-2026-08-18",
+   "mid": "msuci22ir75cm",
+   "value": 27522,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22itw4dj-2026-08-18",
+   "mid": "msuci22itw4dj",
+   "value": 26317,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22ie5zgc-2026-08-18",
+   "mid": "msuci22ie5zgc",
+   "value": 24790,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22iabtl9-2026-08-18",
+   "mid": "msuci22iabtl9",
+   "value": 23357,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-msuci22igpgd7-2026-08-18",
+   "mid": "msuci22igpgd7",
+   "value": 21135,
+   "date": "2026-08-18"
+  },
+  {
+   "id": "p-m-snoweye-2026-08-18",
+   "mid": "m-snoweye",
+   "value": 20549,
+   "date": "2026-08-18"
   }
  ],
  "me": "msuci22hjbxrg",

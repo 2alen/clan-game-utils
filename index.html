@@ -661,13 +661,13 @@ function mergeStates(remote, local, preferLocal) {
       if (tid !== undefined) { target = mergedM.get(tid); idMap.set(m.id, tid); }
     }
     if (target) {
+      /* уровень в игре только растёт — берём больший, чтобы отставшее устройство не откатило свежие данные */
+      if (m.level && (!target.level || m.level > target.level)) target.level = m.level;
       if (preferLocal) {
         target.name = m.name;                  // переименование уезжает в git
-        if (m.level) target.level = m.level;
         if (m.rank) target.rank = m.rank;
         target.archived = !!m.archived;
       } else {
-        if (m.level && !target.level) target.level = m.level;
         if (m.rank && !target.rank) target.rank = m.rank;
       }
     } else {
