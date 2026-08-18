@@ -145,25 +145,32 @@
     font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
     color: var(--ink); background: var(--page);
     border: 1px solid var(--baseline); border-radius: 7px; padding: 8px 10px;
+    box-sizing: border-box;
   }
+  /* единая высота контролов в формах, чтобы поля и списки стояли в одну линию */
+  .frow input, .frow select { height: 38px; }
+  .frow select { padding: 6px 8px; min-width: 150px; }
   textarea { width: 100%; resize: vertical; }
   .btn {
     appearance: none; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
     font: 600 14px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
     color: var(--page); background: var(--ink);
     border: 1px solid var(--ink); border-radius: 7px; padding: 10px 16px;
+    box-sizing: border-box;
   }
+  .frow > .btn { height: 38px; padding: 0 16px; }
   .btn:hover { opacity: .88; }
   .btn.ghost { background: none; color: var(--ink); border-color: var(--baseline); }
   .btn.ghost:hover { background: var(--chip-wash); opacity: 1; }
   .btn.small { padding: 6px 10px; font-size: 12.5px; }
   .btn.danger { background: none; border-color: transparent; color: var(--critical); padding: 4px 8px; }
 
-  .seg { display: inline-flex; border: 1px solid var(--baseline); border-radius: 7px; overflow: hidden; }
+  .seg { display: inline-flex; border: 1px solid var(--baseline); border-radius: 7px; overflow: hidden; height: 38px; box-sizing: border-box; }
   .seg button {
     appearance: none; border: 0; background: none; cursor: pointer;
     font: 600 13px/1 system-ui, -apple-system, "Segoe UI", sans-serif;
-    color: var(--ink-2); padding: 9px 12px; display: flex; align-items: center; gap: 6px;
+    color: var(--ink-2); padding: 0 12px; display: flex; align-items: center; gap: 6px;
   }
   .seg button + button { border-left: 1px solid var(--baseline); }
   .seg button.on { background: var(--chip-wash); color: var(--ink); }
@@ -1036,7 +1043,7 @@ function renderMembers() {
         <td class="dt">${e.last ? fmtDate(e.last) : '—'}</td>
         <td class="num">${p ? fmtShort(p.value) : '—'}</td>
         <td style="white-space:nowrap">
-          <button class="btn ghost small" data-ren="${m.id}">Ник</button>
+          <button class="btn ghost small" data-ren="${m.id}" title="Сменить ник — все обозы и замеры останутся при человеке">✎ Ник</button>
           <button class="btn ghost small" data-arc="${m.id}">${m.archived ? 'Вернуть' : 'В архив'}</button>
           <button class="btn danger small" data-rm="${m.id}" title="Удалить">✕</button>
         </td>
@@ -1055,8 +1062,13 @@ document.getElementById('memberTable').addEventListener('click', (e) => {
   const rm = e.target.closest('[data-rm]');
   if (ren) {
     const m = member(ren.dataset.ren);
-    const name = prompt('Новый ник:', m.name);
-    if (name && name.trim()) { m.name = name.trim(); save(); renderAll(); }
+    const name = prompt('Новый ник для «' + m.name + '» (вся история обозов и могущества останется при нём):', m.name);
+    if (name === null) return;
+    const clean = name.trim();
+    if (!clean) return;
+    const clash = state.members.find(x => x.id !== m.id && x.name.toLowerCase() === clean.toLowerCase());
+    if (clash) { alert('Ник «' + clean + '» уже занят участником в справочнике. Если это один и тот же человек — удалите лишнего.'); return; }
+    m.name = clean; save(); renderAll();
   } else if (arc) {
     const m = member(arc.dataset.arc);
     m.archived = !m.archived; save(); renderAll();
