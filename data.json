@@ -3595,14 +3595,6 @@
    "note": ""
   },
   {
-   "id": "mt1qyrc96zbof",
-   "mid": "msuci22hjbxrg",
-   "res": "iron",
-   "amount": 1,
-   "date": "2026-08-20",
-   "note": ""
-  },
-  {
    "id": "mt1qyw2t2wq8g",
    "mid": "msuci22hjbxrg",
    "res": "iron",
@@ -4326,7 +4318,8 @@
  "gone": {
   "members": [],
   "deliveries": [
-   "msz2z0g7pq3jk"
+   "msz2z0g7pq3jk",
+   "mt1qyrc96zbof"
   ]
  },
  "fixups": {
