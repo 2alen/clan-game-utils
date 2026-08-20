@@ -250,6 +250,12 @@
   #tip .t-r i { width: 7px; height: 7px; border-radius: 50%; flex: none; }
 
   .rank-sel { font-size: 12.5px; padding: 4px 6px; border-radius: 6px; }
+  .updbar {
+    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+    background: var(--chip-wash); border: 1px solid var(--border);
+    border-radius: 10px; padding: 10px 12px; margin-bottom: 14px; font-size: 13.5px;
+  }
+  .updbar[hidden] { display: none; }
   .empty { color: var(--muted); font-size: 14px; padding: 18px 4px; text-align: center; }
   .note { font-size: 12.5px; color: var(--muted); }
   .growth-up { color: var(--good); font-weight: 600; }
@@ -296,6 +302,11 @@
     <div class="tagline">обозы на постройку столицы — Total Battle</div>
     <button class="sync" id="syncChip" title="Состояние синхронизации с GitHub"></button>
   </header>
+
+  <div class="updbar" id="updateBar" hidden>
+    <span>Вышла новая версия приложения — у вас открыта старая.</span>
+    <button class="btn small" id="updBtn">Обновить</button>
+  </div>
 
   <section class="res-grid" id="resCards"></section>
 
@@ -621,6 +632,7 @@ let state = blank();
 })();
 
 /* ============ синхронизация: data.json в GitHub — единый источник правды ============ */
+const APP_VERSION = '2026-08-20.1';   // бампить при каждом изменении index.html
 const GH = { owner: '2alen', repo: 'clan-game-utils', path: 'data.json', defBranch: 'main' };
 const META_KEY = 'clan-treasury-sync';
 let meta = { token: '', branch: GH.defBranch, dirty: false, lastSync: 0 };
@@ -803,6 +815,21 @@ function renderSyncChip() {
   else if (syncState === 'error') { el.classList.add('bad'); el.textContent = '✗ ' + syncErrText; }
   else el.textContent = '● есть несинхронизированные изменения';
 }
+/* Safari кэширует страницу — сверяем версию с репозиторием и предлагаем перезагрузить */
+async function checkForUpdate() {
+  try {
+    const url = `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/index.html?ref=${encodeURIComponent(meta.branch)}`;
+    const res = await fetch(url, { headers: ghHeaders(), cache: 'no-store' });
+    if (!res.ok) return;
+    const src = b64decUtf8((await res.json()).content);
+    const m = src.match(/const APP_VERSION = '([^']+)'/);
+    if (m && m[1] !== APP_VERSION) document.getElementById('updateBar').hidden = false;
+  } catch (e) { /* нет сети — не мешаем работать */ }
+}
+document.getElementById('updBtn').addEventListener('click', () => {
+  location.replace(location.pathname + '?v=' + Date.now());
+});
+
 document.getElementById('syncChip').addEventListener('click', () => {
   document.querySelector('#tabs button[data-tab="data"]').click();
 });
@@ -1559,7 +1586,8 @@ document.getElementById('pDate').value = todayStr();
 renderAll();
 renderSyncChip();
 syncNow();
-window.addEventListener('focus', () => scheduleSync());
+checkForUpdate();
+window.addEventListener('focus', () => { scheduleSync(); checkForUpdate(); });
 window.addEventListener('resize', () => renderPowerChart());
 </script>
 </body>
