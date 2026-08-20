@@ -942,7 +942,7 @@ function renderResCards() {
         <span class="res-name">${r.name}</span>
         ${done ? '<span class="res-done">✓ собрано</span>' : ''}
       </div>
-      <div class="res-num">${fmtShort(got)} <small>из ${fmtShort(goal)}</small></div>
+      <div class="res-num">${fmtShort(Math.min(got, goal))} <small>из ${fmtShort(goal)}</small></div>
       <div class="meter"><i class="${done ? 'full' : ''}" style="width:${pct.toFixed(2)}%; background:var(${r.var})"></i></div>
       <div class="res-sub">
         <span>${done ? 'цель достигнута' : 'осталось ' + fmtShort(left)}</span>
@@ -1389,8 +1389,9 @@ function buildClanMessage() {
   const resLines = RES.map(r => {
     const got = t[r.key], goal = state.goal[r.key] || 50e6;
     gotSum += Math.min(got, goal); goalSum += goal;
-    const pct = Math.round(got / goal * 100);
-    return `${RES_EN[r.key]} - ${pct}% (${fmtShortEn(got)} of ${fmtShortEn(goal)})`;
+    const shown = Math.min(got, goal);           // перебор не показываем — только цель
+    const pct = Math.round(shown / goal * 100);
+    return `${RES_EN[r.key]} - ${pct}% (${fmtShortEn(shown)} of ${fmtShortEn(goal)})`;
   });
 
   if (gotSum === 0) {
