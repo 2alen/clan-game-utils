@@ -204,7 +204,7 @@
   {
    "id": "msuci22hq73u7",
    "name": "Aydael",
-   "archived": false,
+   "archived": true,
    "level": 11,
    "rank": "soldier"
   },
@@ -226,7 +226,7 @@
    "id": "msuci22h7howy",
    "name": "Lorbriman",
    "archived": false,
-   "level": 10,
+   "level": 11,
    "rank": "soldier"
   },
   {
@@ -239,7 +239,7 @@
   {
    "id": "msuci22h4ftpy",
    "name": "Halubrad",
-   "archived": false,
+   "archived": true,
    "level": 10,
    "rank": "soldier"
   },
@@ -247,13 +247,13 @@
    "id": "msuci22h695x2",
    "name": "Tautaur",
    "archived": false,
-   "level": 9,
+   "level": 10,
    "rank": "soldier"
   },
   {
    "id": "msuci22hjpzhy",
    "name": "Celune",
-   "archived": false,
+   "archived": true,
    "level": 11,
    "rank": "soldier"
   },
@@ -345,13 +345,13 @@
    "id": "msuci22ihj9xj",
    "name": "Babelle",
    "archived": false,
-   "level": 9,
+   "level": 10,
    "rank": "soldier"
   },
   {
    "id": "msuci22ir75cm",
    "name": "Nerneilas",
-   "archived": false,
+   "archived": true,
    "level": 9,
    "rank": "soldier"
   },
@@ -380,7 +380,7 @@
    "id": "msuci22ie5zgc",
    "name": "Tagore",
    "archived": false,
-   "level": 9,
+   "level": 10,
    "rank": "soldier"
   },
   {
@@ -415,7 +415,7 @@
    "id": "msuci22iabtl9",
    "name": "Deli",
    "archived": false,
-   "level": 8,
+   "level": 9,
    "rank": "soldier"
   },
   {
@@ -484,6 +484,41 @@
   {
    "id": "m-snoweye",
    "name": "Snoweye",
+   "archived": true,
+   "level": 8,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-redmaster",
+   "name": "RedMaster",
+   "archived": false,
+   "level": 12,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-nerrinen",
+   "name": "Nerrinen",
+   "archived": false,
+   "level": 10,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-darkhammer",
+   "name": "Darkhammer",
+   "archived": false,
+   "level": 12,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-kekelv",
+   "name": "Kekelv",
+   "archived": false,
+   "level": 8,
+   "rank": "soldier"
+  },
+  {
+   "id": "m-raildanel",
+   "name": "Raildanel",
    "archived": false,
    "level": 8,
    "rank": "soldier"
@@ -4920,6 +4955,150 @@
    "id": "p-m-nifur-2026-08-21",
    "mid": "m-nifur",
    "value": 59128,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-redmaster-2026-08-21",
+   "mid": "m-redmaster",
+   "value": 57868,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22h7howy-2026-08-21",
+   "mid": "msuci22h7howy",
+   "value": 57015,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22hnwb2d-2026-08-21",
+   "mid": "msuci22hnwb2d",
+   "value": 56982,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22ihcf75-2026-08-21",
+   "mid": "msuci22ihcf75",
+   "value": 55847,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22hhr5xm-2026-08-21",
+   "mid": "msuci22hhr5xm",
+   "value": 55484,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22h695x2-2026-08-21",
+   "mid": "msuci22h695x2",
+   "value": 54000,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-nerrinen-2026-08-21",
+   "mid": "m-nerrinen",
+   "value": 50239,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-vudogore-2026-08-21",
+   "mid": "m-vudogore",
+   "value": 48453,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22hajcta-2026-08-21",
+   "mid": "msuci22hajcta",
+   "value": 43960,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-floydrodzhil-2026-08-21",
+   "mid": "m-floydrodzhil",
+   "value": 41102,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22ihj9xj-2026-08-21",
+   "mid": "msuci22ihj9xj",
+   "value": 40795,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22iria8e-2026-08-21",
+   "mid": "msuci22iria8e",
+   "value": 38501,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-darkhammer-2026-08-21",
+   "mid": "m-darkhammer",
+   "value": 37071,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-granilbine-2026-08-21",
+   "mid": "m-granilbine",
+   "value": 35890,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-mogamand-2026-08-21",
+   "mid": "m-mogamand",
+   "value": 35361,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22imfccm-2026-08-21",
+   "mid": "msuci22imfccm",
+   "value": 33097,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22ie5zgc-2026-08-21",
+   "mid": "msuci22ie5zgc",
+   "value": 32380,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22ib351d-2026-08-21",
+   "mid": "msuci22ib351d",
+   "value": 31961,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-lorfinad-2026-08-21",
+   "mid": "m-lorfinad",
+   "value": 30860,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22itw4dj-2026-08-21",
+   "mid": "msuci22itw4dj",
+   "value": 30241,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22iabtl9-2026-08-21",
+   "mid": "msuci22iabtl9",
+   "value": 29960,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-kekelv-2026-08-21",
+   "mid": "m-kekelv",
+   "value": 29660,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-m-raildanel-2026-08-21",
+   "mid": "m-raildanel",
+   "value": 26071,
+   "date": "2026-08-21"
+  },
+  {
+   "id": "p-msuci22igpgd7-2026-08-21",
+   "mid": "msuci22igpgd7",
+   "value": 24130,
    "date": "2026-08-21"
   }
  ],
