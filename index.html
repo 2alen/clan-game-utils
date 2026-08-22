@@ -375,7 +375,7 @@
         </div>
         <div class="field grow">
           <label for="msgCoords">Координаты моего города</label>
-          <input type="text" id="msgCoords" placeholder="напр. 512:340">
+          <input type="text" id="msgCoords" placeholder="напр. K:329 X:863 Y:121">
         </div>
         <button class="btn ghost" id="msgCopy">Скопировать</button>
       </div>
@@ -636,7 +636,7 @@ let state = blank();
 })();
 
 /* ============ синхронизация: data.json в GitHub — единый источник правды ============ */
-const APP_VERSION = '2026-08-21.2';   // бампить при каждом изменении index.html
+const APP_VERSION = '2026-08-21.3';   // бампить при каждом изменении index.html
 const GH = { owner: '2alen', repo: 'clan-game-utils', path: 'data.json', defBranch: 'main' };
 const META_KEY = 'clan-treasury-sync';
 let meta = { token: '', branch: GH.defBranch, dirty: false, lastSync: 0 };

@@ -522,6 +522,12 @@
    "archived": false,
    "level": 8,
    "rank": "soldier"
+  },
+  {
+   "id": "m-arashibei",
+   "name": "Arashibei",
+   "archived": false,
+   "rank": "soldier"
   }
  ],
  "deliveries": [
@@ -5274,5 +5280,6 @@
  "fixups": {
   "ranks": true,
   "ceretius2": true
- }
+ },
+ "coords": "K:329 X:863 Y:121"
 }
