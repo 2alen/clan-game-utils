@@ -485,6 +485,7 @@
         <button class="btn" id="ghSave">Сохранить и синхронизировать</button>
       </div>
       <p class="note" id="ghNote"></p>
+      <p class="note">Версия приложения: <b id="appVer"></b></p>
     </div>
     <div class="card">
       <h2>Цели по ресурсам</h2>
@@ -636,7 +637,7 @@ let state = blank();
 })();
 
 /* ============ синхронизация: data.json в GitHub — единый источник правды ============ */
-const APP_VERSION = '2026-08-21.3';   // бампить при каждом изменении index.html
+const APP_VERSION = '2026-08-21.4';   // бампить при каждом изменении index.html
 const GH = { owner: '2alen', repo: 'clan-game-utils', path: 'data.json', defBranch: 'main' };
 const META_KEY = 'clan-treasury-sync';
 let meta = { token: '', branch: GH.defBranch, dirty: false, lastSync: 0 };
@@ -760,9 +761,18 @@ function mergeStates(remote, local, preferLocal) {
   out.power = [...pmap.values()].filter(p => !goneM.has(p.mid));
 
   const src = preferLocal ? local : remote;
+  /* Настройки (me, msgTop, coords и всё, что появится позже) переносим списком из blank(),
+     а не поимённо — раньше добавленное поле молча терялось при первой же синхронизации. */
+  const COLLECTIONS = ['members', 'deliveries', 'power', 'gone', 'goal', 'fixups'];
+  const filled = v => v !== undefined && v !== null && v !== '';
+  for (const k of Object.keys(blank())) {
+    if (COLLECTIONS.includes(k)) continue;
+    const v = filled(src[k]) ? src[k] : filled(local[k]) ? local[k] : remote[k];
+    if (v !== undefined) out[k] = v;
+  }
+  out.me = remap(out.me);
+  out.msgTop = out.msgTop || 8;
   out.goal = Object.assign({}, remote.goal, preferLocal ? local.goal : remote.goal);
-  out.me = remap(src.me || local.me || remote.me);
-  out.msgTop = src.msgTop || 8;
   out.fixups = Object.assign({}, remote.fixups, local.fixups);
   return out;
 }
@@ -1587,6 +1597,7 @@ function renderAll() {
   renderSyncChip();   // значок в шапке всегда отражает актуальное состояние
 }
 
+document.getElementById('appVer').textContent = APP_VERSION;
 document.getElementById('ghToken').value = meta.token;
 document.getElementById('ghBranch').value = meta.branch;
 document.getElementById('ghSave').addEventListener('click', () => {
