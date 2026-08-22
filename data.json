@@ -4226,6 +4226,14 @@
    "amount": 200000,
    "date": "2026-08-21",
    "note": ""
+  },
+  {
+   "id": "mt3qpo0zxc90z",
+   "mid": "msuci22hjbxrg",
+   "res": "wood",
+   "amount": 433,
+   "date": "2026-08-21",
+   "note": ""
   }
  ],
  "power": [
@@ -5270,6 +5278,7 @@
  ],
  "me": "msuci22hjbxrg",
  "msgTop": 5,
+ "coords": "K:329 X:863 Y:121",
  "gone": {
   "members": [],
   "deliveries": [
@@ -5280,6 +5289,5 @@
  "fixups": {
   "ranks": true,
   "ceretius2": true
- },
- "coords": "K:329 X:863 Y:121"
+ }
 }
