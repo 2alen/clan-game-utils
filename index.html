@@ -373,6 +373,10 @@
           <label for="msgTop">Имён в топе</label>
           <input type="number" id="msgTop" min="1" max="20" size="4">
         </div>
+        <div class="field grow">
+          <label for="msgCoords">Координаты моего города</label>
+          <input type="text" id="msgCoords" placeholder="напр. 512:340">
+        </div>
         <button class="btn ghost" id="msgCopy">Скопировать</button>
       </div>
       <textarea id="msgText" rows="12"></textarea>
@@ -541,7 +545,7 @@ function rankLabel(key) { const r = RANKS.find(x => x.key === key); return r ? r
 
 function blank() {
   return { goal: { wood: 50e6, stone: 50e6, iron: 50e6 }, members: [], deliveries: [], power: [],
-           me: null, msgTop: 8, gone: { members: [], deliveries: [] }, fixups: {} };
+           me: null, msgTop: 8, coords: '', gone: { members: [], deliveries: [] }, fixups: {} };
 }
 
 /* стартовый ростер клана — используется при первом открытии, пока нет своих данных */
@@ -632,7 +636,7 @@ let state = blank();
 })();
 
 /* ============ синхронизация: data.json в GitHub — единый источник правды ============ */
-const APP_VERSION = '2026-08-21.1';   // бампить при каждом изменении index.html
+const APP_VERSION = '2026-08-21.2';   // бампить при каждом изменении index.html
 const GH = { owner: '2alen', repo: 'clan-game-utils', path: 'data.json', defBranch: 'main' };
 const META_KEY = 'clan-treasury-sync';
 let meta = { token: '', branch: GH.defBranch, dirty: false, lastSync: 0 };
@@ -1425,7 +1429,8 @@ function buildClanMessage() {
     return ['Capital build - resource drive', '',
       'Goal: ' + fmtShortEn(state.goal.wood) + ' wood, ' + fmtShortEn(state.goal.stone) +
         ' stone and ' + fmtShortEn(state.goal.iron) + ' iron.', '',
-      'Send your caravans whenever you can - every load counts. I am tracking all of them, nothing gets lost.'].join('\n');
+      'Send your caravans to my city' + ((state.coords || '').trim() ? ' at ' + state.coords.trim() : '') +
+        ' whenever you can - every load counts. I am tracking all of them, nothing gets lost.'].join('\n');
   }
 
   const top = [...byM.entries()]
@@ -1441,9 +1446,22 @@ function buildClanMessage() {
   if (top.length) {
     out.push('', 'Big thanks for the caravans: ' + top.join(', ') + '. You are carrying this build.');
   }
+
+  // чего не хватает и куда слать
+  const need = RES.filter(r => t[r.key] < (state.goal[r.key] || 50e6)).map(r => RES_EN[r.key]);
+  const where = (state.coords || '').trim();
+  if (need.length === 0) {
+    out.push('', 'Every resource is in - the capital is fully funded. Great work, everyone.');
+  } else {
+    const list = need.length === 1 ? need[0]
+      : need.slice(0, -1).join(', ') + ' and ' + need[need.length - 1];
+    out.push('', 'What we still need is ' + list + ' - please put your effort there and send caravans to my city' +
+      (where ? ' at ' + where : '') + '.');
+  }
+
   if (silent > 0) {
     out.push('', silent + (silent === 1 ? ' member has' : ' members have') +
-      ' not sent anything yet - any caravan helps, we build the capital together.');
+      ' not sent anything yet - we build the capital together.');
   }
   return out.join('\n');
 }
@@ -1453,6 +1471,7 @@ function renderClanMessage() {
   sel.innerHTML = '<option value="">— никого —</option>' +
     activeMembers().map(m => `<option value="${m.id}" ${state.me === m.id ? 'selected' : ''}>${esc(m.name)}</option>`).join('');
   document.getElementById('msgTop').value = state.msgTop || 8;
+  document.getElementById('msgCoords').value = state.coords || '';
   document.getElementById('msgText').value = buildClanMessage();
 }
 document.getElementById('msgMe').addEventListener('change', (e) => {
@@ -1462,6 +1481,9 @@ document.getElementById('msgTop').addEventListener('change', (e) => {
   const n = parseInt(e.target.value, 10);
   state.msgTop = (n > 0 && n <= 20) ? n : 8;
   save(); renderClanMessage();
+});
+document.getElementById('msgCoords').addEventListener('change', (e) => {
+  state.coords = e.target.value.trim(); save(); renderClanMessage();
 });
 document.getElementById('msgCopy').addEventListener('click', async () => {
   const ta = document.getElementById('msgText');
